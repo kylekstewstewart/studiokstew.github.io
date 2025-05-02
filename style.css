@@ -65,3 +65,14 @@ footer {
     background-color: #222;
     color: white;
 }
+#content.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease;
+  pointer-events: none;
+}
+
+#content.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease;
+  pointer-events: auto;
+}
