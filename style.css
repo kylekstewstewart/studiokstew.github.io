@@ -1,4 +1,3 @@
-
 body, html {
   margin: 0;
   padding: 0;
@@ -9,7 +8,6 @@ body, html {
 }
 
 .background-image {
-  background-image: url('kstewlandingpage.jpeg');
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +16,7 @@ body, html {
   background-size: cover;
   background-position: center;
   z-index: -1;
-  transition: background-image 2s ease-in-out;
+  transition: background-image 1s ease-in-out;
 }
 
 #content {
