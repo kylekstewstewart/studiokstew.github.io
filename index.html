@@ -29,36 +29,50 @@
 
   <script>
     let timer;
+    let slideshowInterval;
     const content = document.getElementById("content");
-    const background = document.querySelector('.background-image');
-    let backgroundImages = ['portfolio/kstew1.jpg', 'portfolio/kstew2.jpg', 'portfolio/kstew3.jpg'];
-    let currentImageIndex = 0;
-    let cyclingBackground = false; // To track whether we should be cycling backgrounds
+    const background = document.querySelector(".background-image");
 
-    // Function to cycle the background image
-    function cycleBackground() {
-      if (cyclingBackground) {
-        currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-        background.style.backgroundImage = `url(${backgroundImages[currentImageIndex]})`;
-      }
+    const images = [
+      "portfolio/kstew1.jpg",
+      "portfolio/kstew2.jpg",
+      "portfolio/kstew3.jpg"
+    ];
+
+    const defaultImage = "kstewlandingpage.jpeg";
+
+    function startSlideshow() {
+      let lastIndex = -1;
+      slideshowInterval = setInterval(() => {
+        let index;
+        do {
+          index = Math.floor(Math.random() * images.length);
+        } while (index === lastIndex);
+        lastIndex = index;
+        background.style.backgroundImage = `url('${images[index]}')`;
+      }, 10000); // change every 10 seconds
+    }
+
+    function stopSlideshow() {
+      clearInterval(slideshowInterval);
+      background.style.backgroundImage = `url('${defaultImage}')`;
     }
 
     function resetTimer() {
       content.classList.remove("fade-out");
       content.classList.add("fade-in");
-      cyclingBackground = false; // Stop cycling until triggered again
+      stopSlideshow();
       clearTimeout(timer);
       timer = setTimeout(() => {
         content.classList.remove("fade-in");
         content.classList.add("fade-out");
-        cyclingBackground = true; // Start cycling the background after fading out
-        cycleBackground(); // Set the initial background change
-        setInterval(cycleBackground, 10000); // Change background every 10 seconds
+        startSlideshow();
       }, 20000); // 20 seconds
     }
 
     document.addEventListener("mousemove", resetTimer);
-    resetTimer(); // Initialize timer on page load
+    background.style.backgroundImage = `url('${defaultImage}')`; // Initial image
+    resetTimer();
   </script>
 </body>
 </html>
