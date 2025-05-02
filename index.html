@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <div class="background-image"></div>
+  <div class="background-image"></div> <!-- Background image div -->
 
   <div id="content">
     <h1>Studio K-Stew</h1>
@@ -36,10 +36,12 @@
     const bg = document.querySelector(".background-image");
     const images = ["kstew1.jpg", "kstew2.jpg", "kstew3.jpg"];
 
+    // Set initial landing page background
     function setInitialBackground() {
       bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
     }
 
+    // Start the slideshow of images every 10 seconds
     function startSlideshow() {
       if (slideshowActive) return;
       slideshowActive = true;
@@ -49,12 +51,14 @@
       }, 10000); // Change image every 10 seconds
     }
 
+    // Stop the slideshow and reset to initial background
     function stopSlideshow() {
       slideshowActive = false;
       clearInterval(intervalId);
-      setInitialBackground();
+      setInitialBackground(); // Reset to initial landing page background
     }
 
+    // Timer for fading out content and starting the slideshow
     function resetTimer() {
       content.classList.remove("fade-out");
       content.classList.add("fade-in");
@@ -63,13 +67,13 @@
       timer = setTimeout(() => {
         content.classList.remove("fade-in");
         content.classList.add("fade-out");
-        startSlideshow();
+        startSlideshow(); // Start slideshow after 20 seconds
       }, 20000); // 20 seconds
     }
 
     document.addEventListener("mousemove", resetTimer);
-    setInitialBackground();
-    resetTimer();
+    setInitialBackground(); // Initialize the background when the page loads
+    resetTimer(); // Initialize the timer
   </script>
 </body>
 </html>
