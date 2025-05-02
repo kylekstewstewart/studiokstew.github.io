@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="background-image" id="bg"></div>
+  <div class="background-image"></div>
 
   <div id="content">
     <h1>Studio K-Stew</h1>
@@ -28,49 +29,41 @@
   <footer>&copy; 2025 Studio K-Stew</footer>
 
   <script>
+    const bg = document.querySelector(".background-image");
     const content = document.getElementById("content");
-    const bg = document.getElementById("bg");
-
-    const images = [
-      "portfolio/kstew1.jpg",
-      "portfolio/kstew2.jpg",
-      "portfolio/kstew3.jpg"
-    ];
+    let timer, cycleInterval;
 
     let originalBackground = "kstewlandingpage.jpeg";
-    let slideshowInterval = null;
+    let images = ["kstew1.jpg", "kstew2.jpg", "kstew3.jpg"];
 
     function startSlideshow() {
-      let currentIndex = 0;
-
-      slideshowInterval = setInterval(() => {
-        currentIndex = Math.floor(Math.random() * images.length);
-        bg.style.backgroundImage = `url('${images[currentIndex]}')`;
-      }, 10000); // Change every 10 seconds
+      cycleInterval = setInterval(() => {
+        let randomImage = images[Math.floor(Math.random() * images.length)];
+        bg.style.backgroundImage = `url('${randomImage}')`;
+      }, 10000);
     }
 
     function stopSlideshow() {
-      clearInterval(slideshowInterval);
+      clearInterval(cycleInterval);
       bg.style.backgroundImage = `url('${originalBackground}')`;
     }
 
     function resetTimer() {
       content.classList.remove("fade-out");
       content.classList.add("fade-in");
-      stopSlideshow(); // Revert background to landing image
-      clearTimeout(window.inactivityTimer);
-      window.inactivityTimer = setTimeout(() => {
+      stopSlideshow();
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
         content.classList.remove("fade-in");
         content.classList.add("fade-out");
-        startSlideshow(); // Start slideshow after inactivity
-      }, 20000); // 20 seconds
+        startSlideshow();
+      }, 20000);
     }
 
-    // Set initial background image
-    bg.style.backgroundImage = `url('${originalBackground}')`;
-
     document.addEventListener("mousemove", resetTimer);
-    resetTimer(); // Start the timer immediately on load
+    bg.style.backgroundImage = `url('${originalBackground}')`;
+    resetTimer();
   </script>
 </body>
 </html>
