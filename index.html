@@ -30,31 +30,35 @@
   <script>
     let timer;
     const content = document.getElementById("content");
+    const background = document.querySelector('.background-image');
+    let backgroundImages = ['portfolio/kstew1.jpg', 'portfolio/kstew2.jpg', 'portfolio/kstew3.jpg'];
+    let currentImageIndex = 0;
+    let cyclingBackground = false; // To track whether we should be cycling backgrounds
+
+    // Function to cycle the background image
+    function cycleBackground() {
+      if (cyclingBackground) {
+        currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+        background.style.backgroundImage = `url(${backgroundImages[currentImageIndex]})`;
+      }
+    }
 
     function resetTimer() {
       content.classList.remove("fade-out");
       content.classList.add("fade-in");
+      cyclingBackground = false; // Stop cycling until triggered again
       clearTimeout(timer);
       timer = setTimeout(() => {
         content.classList.remove("fade-in");
         content.classList.add("fade-out");
+        cyclingBackground = true; // Start cycling the background after fading out
+        cycleBackground(); // Set the initial background change
+        setInterval(cycleBackground, 10000); // Change background every 10 seconds
       }, 20000); // 20 seconds
     }
 
     document.addEventListener("mousemove", resetTimer);
     resetTimer(); // Initialize timer on page load
-
-    // Background Image Cycling Logic
-    const images = ['portfolio/kstew1.jpg', 'portfolio/kstew2.jpg', 'portfolio/kstew3.jpg'];
-    let currentImageIndex = 0;
-
-    function changeBackgroundImage() {
-      const background = document.querySelector('.background-image');
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      background.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-    }
-
-    setInterval(changeBackgroundImage, 10000); // Change every 10 seconds
   </script>
 </body>
 </html>
