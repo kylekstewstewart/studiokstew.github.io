@@ -8,6 +8,7 @@ body, html {
 }
 
 .background-image {
+  background-image: url('kstewlandingpage.jpeg');
   position: fixed;
   top: 0;
   left: 0;
