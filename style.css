@@ -2,39 +2,45 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
-  color: white;
-  text-align: center;
-  position: relative;
-  z-index: 1;
+  background-color: black;
 }
 
 .background-image {
-  background: url('kstewlandingpage.jpeg') no-repeat center center/cover;
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   z-index: -1;
+  transition: background-image 1s ease-in-out;
 }
 
 #content {
-  padding-top: 20vh;
-  transition: opacity 1s ease;
+  position: relative;
+  text-align: center;
+  padding-top: 10vh;
+  color: white;
+  z-index: 1;
 }
 
-.fade-out {
+#content.fade-out {
   opacity: 0;
+  transition: opacity 2s ease;
 }
 
-.fade-in {
+#content.fade-in {
   opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .icon {
-  width: 40px;
-  margin: 20px;
+  width: 32px;
+  height: 32px;
+  margin: 10px;
 }
 
 .buttons {
@@ -43,17 +49,18 @@ body, html {
 
 .button {
   display: inline-block;
-  padding: 10px 20px;
   margin: 10px;
-  border: 2px solid white;
+  padding: 10px 20px;
   color: white;
-  background: transparent;
+  background-color: transparent;
+  border: 2px solid white;
   text-decoration: none;
-  transition: 0.3s;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .button:hover {
-  background: white;
+  background-color: white;
   color: black;
 }
 
@@ -61,6 +68,7 @@ footer {
   position: fixed;
   bottom: 10px;
   width: 100%;
+  text-align: center;
   color: white;
   font-size: 14px;
 }
