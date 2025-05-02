@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio K-Stew</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Studio K-Stew</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="background-image"></div>
@@ -15,7 +14,7 @@
     <p>Portfolio coming soon.</p>
 
     <a href="https://www.instagram.com/studiokstew" target="_blank">
-      <img src="Instagram_icon.png" alt="Instagram" class="icon"/>
+      <img src="Instagram_icon.png" alt="Instagram" class="icon" />
     </a>
 
     <div class="buttons">
@@ -24,25 +23,26 @@
       <a class="button" href="#">Portraits</a>
       <a class="button" href="#">Sports</a>
     </div>
-</div>
-    <footer>&copy; 2025 Studio K-Stew</footer>
-    <script>
-  let timer;
-  const content = document.getElementById("content");
+  </div>
 
-  function resetTimer() {
-    content.classList.remove("fade-out");
-    content.classList.add("fade-in");
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      content.classList.remove("fade-in");
-      content.classList.add("fade-out");
-    }, 20000); // 20 seconds
-  }
+  <footer>&copy; 2025 Studio K-Stew</footer>
 
-  document.addEventListener("mousemove", resetTimer);
-  resetTimer(); // Initialize timer on page load
-</script>
+  <script>
+    let timer;
+    const content = document.getElementById("content");
 
+    function resetTimer() {
+      content.classList.remove("fade-out");
+      content.classList.add("fade-in");
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        content.classList.remove("fade-in");
+        content.classList.add("fade-out");
+      }, 20000); // 20 seconds
+    }
+
+    document.addEventListener("mousemove", resetTimer);
+    resetTimer(); // Initialize timer on page load
+  </script>
 </body>
 </html>
