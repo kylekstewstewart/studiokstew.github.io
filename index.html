@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <body style="background-image: url('kstewlandingpage.jpeg'); background-size: cover; background-position: center;">
 
   <div class="background-image"></div>
 
@@ -46,8 +45,8 @@
       slideshowActive = true;
       intervalId = setInterval(() => {
         const image = images[Math.floor(Math.random() * images.length)];
-        bg.style.backgroundImage = `url('${image}')`;
-      }, 10000);
+        bg.style.backgroundImage = `url('portfolio/${image}')`;
+      }, 10000); // Change image every 10 seconds
     }
 
     function stopSlideshow() {
@@ -65,7 +64,7 @@
         content.classList.remove("fade-in");
         content.classList.add("fade-out");
         startSlideshow();
-      }, 20000);
+      }, 20000); // 20 seconds
     }
 
     document.addEventListener("mousemove", resetTimer);
