@@ -7,11 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="background-image"></div>
+
   <div id="content">
-    <h1>Sports Gallery</h1>
-    <p>Coming soon.</p>
-    <a class="button" href="index.html">← Back to Home</a>
+    <h1>Sports</h1>
+    <p>Gallery coming soon.</p>
+
+    <a href="index.html" class="button">Home</a>
+    <a href="wildlife.html" class="button">Wildlife</a>
+    <a href="landscapes.html" class="button">Landscapes</a>
+    <a href="portraits.html" class="button">Portraits</a>
   </div>
+
   <footer>&copy; 2025 Studio K-Stew</footer>
+
+  <script>
+    const bg = document.querySelector(".background-image");
+    bg.style.backgroundImage = "url('portfolio/kstewlandingpage.jpeg')"; // Placeholder background
+  </script>
 </body>
 </html>
+
