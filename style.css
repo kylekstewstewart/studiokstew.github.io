@@ -94,3 +94,16 @@ footer {
 .gallery img:hover {
   transform: scale(1.05);
 }
+.landscapes-page #content {
+  color: black;
+}
+
+.landscapes-page .button {
+  color: black;
+  border-color: black;
+}
+
+.landscapes-page .button:hover {
+  background-color: black;
+  color: white;
+}
