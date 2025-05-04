@@ -1,1 +1,76 @@
-<!DOCTYPE html><html><head><title>Home</title><link rel='stylesheet' href='style.css'></head><body><div class='background-image'></div><div id='content'><h1>Studio K-Stew</h1><a href='wildlife.html'>Wildlife</a><a href='landscapes.html'>Landscapes</a><a href='portraits.html'>Portraits</a><a href='sports.html'>Sports</a><a href='about.html'>About</a></div></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Studio K-Stew</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background-image"></div>
+
+  <div id="content">
+    <h1>Studio K-Stew</h1>
+    <p>Portfolio coming soon.</p>
+
+    <a href="https://www.instagram.com/studiokstew" target="_blank">
+      <img src="images/Instagram_icon.png" alt="Instagram" class="icon" />
+    </a>
+
+    <div class="buttons">
+      <a class="button" href="wildlife.html">Wildlife</a>
+      <a class="button" href="landscapes.html">Landscapes</a>
+      <a class="button" href="portraits.html">Portraits</a>
+      <a class="button" href="sports.html">Sports</a>
+      <a class="button" href="about.html">About Me</a>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 Studio K-Stew</footer>
+
+  <script>
+    let timer;
+    let slideshowActive = false;
+    let intervalId = null;
+    const content = document.getElementById("content");
+    const bg = document.querySelector(".background-image");
+    const images = ["kstew1.jpg", "kstew2.jpg", "kstew3.jpg"];
+
+    function setInitialBackground() {
+      bg.style.backgroundImage = "url('images/kstewlandingpage.jpeg')";
+    }
+
+    function startSlideshow() {
+      if (slideshowActive) return;
+      slideshowActive = true;
+      intervalId = setInterval(() => {
+        const image = images[Math.floor(Math.random() * images.length)];
+        bg.style.backgroundImage = `url('portfolio/${image}')`;
+      }, 10000);
+    }
+
+    function stopSlideshow() {
+      slideshowActive = false;
+      clearInterval(intervalId);
+      setInitialBackground();
+    }
+
+    function resetTimer() {
+      content.classList.remove("fade-out");
+      content.classList.add("fade-in");
+      stopSlideshow();
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        content.classList.remove("fade-in");
+        content.classList.add("fade-out");
+        startSlideshow();
+      }, 20000);
+    }
+
+    document.addEventListener("mousemove", resetTimer);
+    setInitialBackground();
+    resetTimer();
+  </script>
+</body>
+</html>
