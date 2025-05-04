@@ -2,42 +2,34 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
   font-family: Arial, sans-serif;
-  background-color: black;
+  overflow: hidden;
 }
-
 .background-image {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background-image: url('kstewlandingpage.jpeg');
   background-size: cover;
   background-position: center;
   z-index: -1;
 }
-
 #content {
   position: relative;
   text-align: center;
-  padding: 10vh 5vw 5vh;
+  padding: 10vh 10vw;
   z-index: 1;
   color: white;
 }
-
-body.portfolio-page #content {
+#content.dark-text {
   color: black;
 }
-
-.nav-buttons {
-  margin: 20px 0;
+.buttons {
+  margin-top: 20px;
 }
-
 .button {
   display: inline-block;
-  margin: 5px;
+  margin: 10px;
   padding: 10px 20px;
   color: white;
   background-color: transparent;
@@ -46,47 +38,33 @@ body.portfolio-page #content {
   font-weight: bold;
   transition: background-color 0.3s, color 0.3s;
 }
-
-body.portfolio-page .button {
+.dark-text .button {
   color: black;
   border-color: black;
 }
-
-body.portfolio-page .button:hover {
+.dark-text .button:hover {
   background-color: black;
   color: white;
 }
-
-footer {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 14px;
-}
-
-body.portfolio-page footer {
+.button:hover {
+  background-color: white;
   color: black;
 }
-
 .about-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  align-items: center;
+  margin-top: 30px;
 }
-
 .headshot {
-  max-width: 200px;
+  width: 200px;
   height: auto;
-  border-radius: 50%;
+  margin: 20px;
+  border-radius: 10px;
 }
-
 .bio {
   max-width: 500px;
   text-align: left;
+  margin: 20px;
 }
