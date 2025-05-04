@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +7,14 @@
   <title>Studio K-Stew</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-  <div class="background-image"></div> <!-- Background image div -->
-
+  <div class="background-image"></div>
   <div id="content">
     <h1>Studio K-Stew</h1>
     <p>Portfolio coming soon.</p>
-
     <a href="https://www.instagram.com/studiokstew" target="_blank">
-      <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+      <img src="images/Instagram_icon.png" alt="Instagram" class="icon" />
     </a>
-
     <div class="buttons">
       <a class="button" href="wildlife.html">Wildlife</a>
       <a class="button" href="landscapes.html">Landscapes</a>
@@ -27,9 +23,7 @@
       <a class="button" href="about.html">About Me</a>
     </div>
   </div>
-
   <footer>&copy; 2025 Studio K-Stew</footer>
-
   <script>
     let timer;
     let slideshowActive = false;
@@ -39,7 +33,7 @@
     let images = [];
 
     function setInitialBackground() {
-      bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
+      bg.style.backgroundImage = "url('images/kstewlandingpage.jpeg')";
     }
 
     function startSlideshow() {
@@ -69,20 +63,19 @@
       }, 20000);
     }
 
-    async function loadImages() {
+    async function loadManifest() {
       try {
-        const response = await fetch('portfolio/images.json');
-        if (!response.ok) throw new Error("Image list not found");
-        images = await response.json();
+        const response = await fetch('portfolio/manifest.json');
+        const data = await response.json();
+        images = data.images || [];
       } catch (e) {
-        console.error("Failed to load image list:", e);
+        console.error("Failed to load manifest.json", e);
       }
     }
 
     document.addEventListener("mousemove", resetTimer);
-
     setInitialBackground();
-    loadImages().then(resetTimer);
+    loadManifest().then(resetTimer);
   </script>
 </body>
 </html>
