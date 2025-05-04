@@ -3,10 +3,11 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   font-family: Arial, sans-serif;
   background-color: black;
 }
+<body class="alt-page">
 
 .background-image {
   position: fixed;
@@ -16,7 +17,7 @@ body, html {
   height: 100%;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: -100;
   transition: background-image 1s ease-in-out;
 }
 
