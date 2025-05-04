@@ -19,11 +19,10 @@ body, html {
   background-position: center;
   z-index: -100;
   transition: background-image 1s ease-in-out;
+  background-image: url('kstewlandingpage.jpeg'
 }
 
-.alt-page .background-image {
-  background-image: url('kstewlandingpage.jpeg');
-}
+
 
 #content {
   position: relative;
