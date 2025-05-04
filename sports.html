@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sports | Studio K-Stew</title>
+  <title>Sports - Studio K-Stew</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="background-image"></div>
+<body class="sports-page">
+
+  <div class="background-image"></div> <!-- Background image div -->
 
   <div id="content">
     <h1>Sports</h1>
-    <p>Gallery coming soon.</p>
-
-    <a href="index.html" class="button">Home</a>
-    <a href="wildlife.html" class="button">Wildlife</a>
-    <a href="landscapes.html" class="button">Landscapes</a>
-    <a href="portraits.html" class="button">Portraits</a>
+    <p>Photos coming soon.</p>
+    <div class="buttons">
+      <a class="button" href="index.html">Home</a>
+      <a class="button" href="wildlife.html">Wildlife</a>
+      <a class="button" href="landscapes.html">Landscapes</a>
+      <a class="button" href="portraits.html">Portraits</a>
+      <a class="button" href="sports.html">Sports</a>
+    </div>
   </div>
 
   <footer>&copy; 2025 Studio K-Stew</footer>
 
   <script>
     const bg = document.querySelector(".background-image");
-    bg.style.backgroundImage = "url('portfolio/kstewlandingpage.jpeg')"; // Placeholder background
+    bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
   </script>
 </body>
 </html>
-
