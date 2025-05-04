@@ -40,6 +40,7 @@
       slideshowActive = true;
       intervalId = setInterval(() => {
         const image = images[Math.floor(Math.random() * images.length)];
+        const preloader = new Image();
         bg.style.backgroundImage = `url('portfolio/${image}')`;
       }, 10000);
     }
