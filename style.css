@@ -20,6 +20,10 @@ body, html {
   transition: background-image 1s ease-in-out;
 }
 
+.alt-page .background-image {
+  background-image: url('images/kstewlandingpage.jpeg');
+}
+
 #content {
   position: relative;
   text-align: center;
