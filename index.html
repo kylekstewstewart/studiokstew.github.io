@@ -8,14 +8,13 @@
 </head>
 <body>
   <div class="background-frame">
-  <div class="background-image"></div>
+    <img class="background-image" src="kstewlandingpage.jpeg" alt="Background"/>
   </div>
-  
   <div id="content">
     <h1>Studio K-Stew</h1>
     <p>Portfolio coming soon.</p>
     <a href="https://www.instagram.com/studiokstew" target="_blank">
-      <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+      <img src="images/Instagram_icon.png" alt="Instagram" class="icon" />
     </a>
     <div class="buttons">
       <a class="button" href="wildlife.html">Wildlife</a>
@@ -35,7 +34,7 @@
     let images = [];
 
     function setInitialBackground() {
-      bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
+      bg.src = "kstewlandingpage.jpeg";
     }
 
     function startSlideshow() {
@@ -43,8 +42,7 @@
       slideshowActive = true;
       intervalId = setInterval(() => {
         const image = images[Math.floor(Math.random() * images.length)];
-        const preloader = new Image();
-        bg.style.backgroundImage = `url('portfolio/${image}')`;
+        bg.src = `portfolio/${image}`;
       }, 10000);
     }
 
@@ -70,7 +68,7 @@
       try {
         const response = await fetch('portfolio/manifest.json');
         const data = await response.json();
-        images = data;
+        images = data || [];
       } catch (e) {
         console.error("Failed to load manifest.json", e);
       }
