@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wildlife</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body class="alt-page">
 
+  <!-- Background frame -->
   <div class="background-wrapper">
     <div class="background-image"></div>
   </div>
 
+  <!-- Main content -->
   <div id="content" class="fade-in">
     <h1>Wildlife</h1>
     <p>Content coming soon...</p>
 
-    <!-- Correct class names and structure for image scaling and styling -->
     <div class="gallery">
       <div class="image-frame">
-        <img src="portfolio/kstew3.jpg" alt="Wildlife Image 1">
+        <img src="portfolio/kstew3.jpg" alt="Wildlife Image 1" loading="lazy" />
       </div>
       <div class="image-frame">
-        <img src="portfolio/kstew4.jpg" alt="Wildlife Image 2">
+        <img src="portfolio/kstew4.jpg" alt="Wildlife Image 2" loading="lazy" />
       </div>
       <div class="image-frame">
-        <img src="portfolio/kstew5.jpg" alt="Wildlife Image 3">
+        <img src="portfolio/kstew5.jpg" alt="Wildlife Image 3" loading="lazy" />
       </div>
     </div>
 
@@ -33,6 +34,60 @@
       <a class="button" href="index.html">Home</a>
     </div>
   </div>
+
+  <!-- Lightbox overlay with navigation -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-prev">&#10094;</button>
+    <img src="" alt="Expanded view" id="lightbox-img" />
+    <button class="lightbox-next">&#10095;</button>
+  </div>
+
+  <!-- Lightbox script -->
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const images = Array.from(document.querySelectorAll('.image-frame img'));
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    let currentIndex = 0;
+
+    function showLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex].src;
+      lightbox.classList.add('show');
+    }
+
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        showLightbox(index);
+      });
+    });
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showNext();
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showPrev();
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('show');
+      lightboxImg.src = '';
+    });
+  </script>
 
 </body>
 </html>
