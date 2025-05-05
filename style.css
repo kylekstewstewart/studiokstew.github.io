@@ -100,3 +100,30 @@ footer {
   color: white;
   z-index: 1;
 }
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  padding: 0 20px 60px;
+}
+
+.image-frame {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.image-frame:hover {
+  transform: scale(1.02);
+}
+
+.image-frame img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  display: block;
+}
