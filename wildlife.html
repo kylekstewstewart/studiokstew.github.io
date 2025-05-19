@@ -5,50 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wildlife</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body.alt-page {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .button {
+      background-color: #333;
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .image-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-frame img:hover {
+      transform: scale(1.03);
+    }
+
+    .lightbox-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      flex-direction: row;
+    }
+
+    .lightbox-overlay.show {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .lightbox-prev {
+      left: 20px;
+    }
+
+    .lightbox-next {
+      right: 20px;
+    }
+
+    .background-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    .background-image {
+      background: url('your-background.jpg') no-repeat center center / cover;
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+    }
+  </style>
 </head>
 <body class="alt-page">
 
-  <!-- Background frame -->
+  <!-- Background -->
   <div class="background-wrapper">
     <div class="background-image"></div>
   </div>
 
-  <!-- Main content -->
-  <div id="content" class="fade-in">
+  <!-- Sticky Header -->
+  <header>
     <h1>Wildlife</h1>
-    <p>Content coming soon...</p>
-
-    <div class="gallery">
-      <div class="image-frame">
-        <img src="portfolio/kstew3.jpg" alt="Wildlife Image 1" loading="lazy" />
-      </div>
-      <div class="image-frame">
-        <img src="portfolio/kstew4.jpg" alt="Wildlife Image 2" loading="lazy" />
-      </div>
-      <div class="image-frame">
-        <img src="portfolio/kstew5.jpg" alt="Wildlife Image 3" loading="lazy" />
-      </div>
-      <div class="image-frame">
-        <img src="portfolio/kstew9.jpg" alt="Wildlife Image 4" loading="lazy" />
-      </div>
-      <div class="image-frame">
-        <img src="portfolio/kstew8.jpg" alt="Wildlife Image 6" loading="lazy" />
-      </div>
-    </div>
-
-    <div class="buttons">
+    <div class="header-icons">
       <a class="button" href="index.html">Home</a>
+      <a href="https://www.instagram.com/studiokstew" target="_blank">
+        <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+      </a>
+    </div>
+  </header>
+
+  <!-- Gallery -->
+  <div class="gallery">
+    <div class="image-frame">
+      <img src="portfolio/kstew3.jpg" alt="Wildlife Image 1" loading="lazy" />
+    </div>
+    <div class="image-frame">
+      <img src="portfolio/kstew4.jpg" alt="Wildlife Image 2" loading="lazy" />
+    </div>
+    <div class="image-frame">
+      <img src="portfolio/kstew5.jpg" alt="Wildlife Image 3" loading="lazy" />
+    </div>
+    <div class="image-frame">
+      <img src="portfolio/kstew9.jpg" alt="Wildlife Image 4" loading="lazy" />
+    </div>
+    <div class="image-frame">
+      <img src="portfolio/kstew8.jpg" alt="Wildlife Image 5" loading="lazy" />
     </div>
   </div>
 
-  <!-- Lightbox overlay with navigation -->
+  <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
     <button class="lightbox-prev">&#10094;</button>
     <img src="" alt="Expanded view" id="lightbox-img" />
     <button class="lightbox-next">&#10095;</button>
   </div>
 
-  <!-- Lightbox script -->
+  <!-- Script -->
   <script>
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
