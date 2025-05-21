@@ -152,25 +152,30 @@
     let images = [];
     let currentIndex = 0;
 
-    async function loadImages() {
-      try {
-        const res = await fetch('portfolio/manifest.json');
-        images = await res.json();
-        images.forEach((img, i) => {
-          const frame = document.createElement('div');
-          frame.className = 'image-frame';
-          const image = document.createElement('img');
-          image.src = `portfolio/${img}`;
-          image.alt = `Landscape ${i + 1}`;
-          image.loading = 'lazy';
-          image.addEventListener('click', () => showLightbox(i));
-          frame.appendChild(image);
-          gallery.appendChild(frame);
-        });
-      } catch (e) {
-        console.error("Error loading manifest.json:", e);
-      }
-    }
+   async function loadImages() {
+  try {
+    const res = await fetch('portfolio/manifest.json');
+    const allImages = await res.json();
+
+    // Only include files that start with "landscape" (case-insensitive)
+    images = allImages.filter(img => /^landscape\d+\.(jpe?g|png|webp)$/i.test(img));
+
+    images.forEach((img, i) => {
+      const frame = document.createElement('div');
+      frame.className = 'image-frame';
+      const image = document.createElement('img');
+      image.src = `portfolio/${img}`;
+      image.alt = `Landscape ${i + 1}`;
+      image.loading = 'lazy';
+      image.addEventListener('click', () => showLightbox(i));
+      frame.appendChild(image);
+      gallery.appendChild(frame);
+    });
+  } catch (e) {
+    console.error("Error loading manifest.json:", e);
+  }
+}
+
 
     function showLightbox(index) {
       currentIndex = index;
