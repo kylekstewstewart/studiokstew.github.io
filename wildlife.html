@@ -171,7 +171,7 @@
 
     async function loadImages() {
       try {
-        const res = await fetch('portfolio/manifest.json');
+        const res = await fetch('/portfolio/manifest.json');
         const allImages = await res.json();
 
         // Only include files that start with "wildlife" (case-insensitive)
@@ -181,7 +181,7 @@
           const frame = document.createElement('div');
           frame.className = 'image-frame';
           const image = document.createElement('img');
-          image.src = `portfolio/${img}`;
+          image.src = `/portfolio/${img}`;
           image.alt = `Wildlife ${i + 1}`;
           image.loading = 'lazy';
           image.addEventListener('click', () => showLightbox(i));
@@ -195,18 +195,18 @@
 
     function showLightbox(index) {
       currentIndex = index;
-      lightboxImg.src = `portfolio/${images[currentIndex]}`;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
       lightbox.classList.add('show');
     }
 
     function showNext() {
       currentIndex = (currentIndex + 1) % images.length;
-      lightboxImg.src = `portfolio/${images[currentIndex]}`;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
     }
 
     function showPrev() {
       currentIndex = (currentIndex - 1 + images.length) % images.length;
-      lightboxImg.src = `portfolio/${images[currentIndex]}`;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
     }
 
     nextBtn.addEventListener('click', e => {
