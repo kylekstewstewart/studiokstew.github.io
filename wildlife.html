@@ -6,11 +6,6 @@
   <title>Wildlife</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body.alt-page {
-      margin: 0;
-      font-family: sans-serif;
-    }
-
     header {
       position: sticky;
       top: 0;
@@ -135,7 +130,7 @@
     }
   </style>
 </head>
-<body class="alt-page">
+<body>
 
   <!-- Background -->
   <div class="background-wrapper">
@@ -144,7 +139,7 @@
 
   <!-- Sticky Header -->
   <header>
-    <h1>Wildlife</h1>
+    <div class="page-title">Wildlife</div>
     <div class="header-icons">
       <a class="button" href="index.html">Home</a>
       <a href="https://www.instagram.com/studiokstew" target="_blank">
@@ -153,24 +148,8 @@
     </div>
   </header>
 
-  <!-- Gallery -->
-  <div class="gallery">
-    <div class="image-frame">
-      <img src="portfolio/kstew3.jpg" alt="Wildlife Image 1" loading="lazy" />
-    </div>
-    <div class="image-frame">
-      <img src="portfolio/kstew4.jpg" alt="Wildlife Image 2" loading="lazy" />
-    </div>
-    <div class="image-frame">
-      <img src="portfolio/kstew5.jpg" alt="Wildlife Image 3" loading="lazy" />
-    </div>
-    <div class="image-frame">
-      <img src="portfolio/kstew9.jpg" alt="Wildlife Image 4" loading="lazy" />
-    </div>
-    <div class="image-frame">
-      <img src="portfolio/kstew8.jpg" alt="Wildlife Image 5" loading="lazy" />
-    </div>
-  </div>
+  <!-- Gallery Container -->
+  <div class="gallery" id="gallery"></div>
 
   <!-- Lightbox -->
   <div class="lightbox-overlay" id="lightbox">
@@ -179,43 +158,62 @@
     <button class="lightbox-next">&#10095;</button>
   </div>
 
-  <!-- Script -->
   <script>
+    const gallery = document.getElementById('gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const images = Array.from(document.querySelectorAll('.image-frame img'));
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
+
+    let images = [];
     let currentIndex = 0;
+
+    async function loadImages() {
+      try {
+        const res = await fetch('portfolio/manifest.json');
+        const allImages = await res.json();
+
+        // Only include files that start with "wildlife" (case-insensitive)
+        images = allImages.filter(img => /^wildlife\d+\.(jpe?g|png|webp)$/i.test(img));
+
+        images.forEach((img, i) => {
+          const frame = document.createElement('div');
+          frame.className = 'image-frame';
+          const image = document.createElement('img');
+          image.src = `portfolio/${img}`;
+          image.alt = `Wildlife ${i + 1}`;
+          image.loading = 'lazy';
+          image.addEventListener('click', () => showLightbox(i));
+          frame.appendChild(image);
+          gallery.appendChild(frame);
+        });
+      } catch (e) {
+        console.error("Error loading manifest.json:", e);
+      }
+    }
 
     function showLightbox(index) {
       currentIndex = index;
-      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.src = `portfolio/${images[currentIndex]}`;
       lightbox.classList.add('show');
     }
 
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        showLightbox(index);
-      });
-    });
-
     function showNext() {
       currentIndex = (currentIndex + 1) % images.length;
-      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.src = `portfolio/${images[currentIndex]}`;
     }
 
     function showPrev() {
       currentIndex = (currentIndex - 1 + images.length) % images.length;
-      lightboxImg.src = images[currentIndex].src;
+      lightboxImg.src = `portfolio/${images[currentIndex]}`;
     }
 
-    nextBtn.addEventListener('click', (e) => {
+    nextBtn.addEventListener('click', e => {
       e.stopPropagation();
       showNext();
     });
 
-    prevBtn.addEventListener('click', (e) => {
+    prevBtn.addEventListener('click', e => {
       e.stopPropagation();
       showPrev();
     });
@@ -224,7 +222,8 @@
       lightbox.classList.remove('show');
       lightboxImg.src = '';
     });
-  </script>
 
+    loadImages();
+  </script>
 </body>
 </html>
