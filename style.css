@@ -34,31 +34,42 @@ body, html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
   position: fixed;
   top: 0;
   left: 0;
   z-index: -3;
 }
 
+/* Site Header */
+.site-header {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: black;
+  text-shadow: 1px 1px 2px white;
+  z-index: 20;
+  user-select: none;
+}
+
 /* Hero container */
 #hero-container {
   position: relative;
   max-width: 900px;
-  margin: 10vh auto 5vh auto;
+  margin: 20vh auto 0;
   text-align: center;
   z-index: 10;
   padding: 0 20px;
 }
 
-/* Black header text */
-#hero-container h1 {
-  color: black;
-  font-size: 3.5rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  user-select: none;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+/* Hero heading */
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: white;
 }
 
 /* Hero paragraph */
@@ -77,21 +88,22 @@ body, html {
   opacity: 0;
 }
 
-/* Instagram icon wrapper */
-.instagram-wrapper {
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-/* Icon-only Instagram button */
-.instagram-icon img {
+/* Instagram Button Container */
+.instagram-button {
   width: 32px;
   height: 32px;
+  margin: 0 auto 20px;
+}
+
+.instagram-button img {
+  width: 100%;
+  height: auto;
+  display: block;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.instagram-icon img:hover {
+.instagram-button img:hover {
   transform: scale(1.1);
 }
 
@@ -103,6 +115,7 @@ body, html {
   gap: 15px;
   z-index: 15;
   position: relative;
+  margin-top: 10px;
 }
 
 /* Regular buttons */
@@ -134,97 +147,4 @@ footer {
   font-size: 14px;
   color: white;
   z-index: 1;
-}
-
-/* Optional gallery elements retained for future use */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-  padding: 0 20px 60px;
-}
-
-.image-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  overflow: hidden;
-  padding: 10px;
-  transition: transform 0.3s ease;
-  border: 4px solid white;
-}
-
-.image-frame:hover {
-  transform: scale(1.02);
-}
-
-.image-frame img {
-  max-width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border-radius: 15px;
-  display: block;
-  cursor: pointer;
-}
-
-/* Lightbox overlay (if used in future gallery pages) */
-.lightbox-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.lightbox-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-}
-
-.lightbox-overlay.show {
-  display: flex;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 1001;
-}
-
-.lightbox-prev {
-  left: 20px;
-}
-
-.lightbox-next {
-  right: 20px;
-}
-
-.page-title {
-  font-weight: 700;
-  color: #000;
-  font-size: 1.75rem;
 }
