@@ -58,7 +58,7 @@ body, html {
 #hero-container {
   position: relative;
   max-width: 900px;
-  margin: 20vh auto 0;
+  margin: 18vh auto 0;
   text-align: center;
   z-index: 10;
   padding: 0 20px;
@@ -88,23 +88,27 @@ body, html {
   opacity: 0;
 }
 
-/* Instagram Button Container */
+/* Instagram Button */
 .instagram-button {
-  width: 32px;
-  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto 20px;
+  width: 40px;
+  height: 40px;
+  z-index: 15;
 }
 
 .instagram-button img {
-  width: 100%;
-  height: auto;
-  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .instagram-button img:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 /* Buttons container */
@@ -145,6 +149,7 @@ footer {
   width: 100%;
   text-align: center;
   font-size: 14px;
-  color: white;
-  z-index: 1;
+  color: black;
+  text-shadow: 1px 1px 2px white;
+  z-index: 2;
 }
