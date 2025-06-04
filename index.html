@@ -192,17 +192,39 @@
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
     }
+<script>
+  const wrapper = document.getElementById('background-wrapper');
+  const slides = [];
 
-    fetch('portfolio/manifest.json')
-      .then(res => res.json())
-      .then(data => {
-        data.forEach(filename => {
-          const slide = document.createElement('div');
-          slide.className = 'bg-slide';
-          slide.style.backgroundImage = `url('portfolio/${filename}')`;
-          wrapper.appendChild(slide);
-          slides.push(slide);
-        });
+  const filenames = ['kstew1.jpg', 'kstew2.jpg']; // test manually
+
+  filenames.forEach(filename => {
+    const slide = document.createElement('div');
+    slide.className = 'bg-slide';
+    slide.style.backgroundImage = `url('portfolio/${filename}')`;
+    wrapper.appendChild(slide);
+    slides.push(slide);
+  });
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('visible', i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }
+
+  let currentSlide = 0;
+  if (slides.length > 0) {
+    showSlide(0);
+    setInterval(nextSlide, 8000);
+  }
+</script>
+
+
 
         if (slides.length > 0) {
           showSlide(0);
