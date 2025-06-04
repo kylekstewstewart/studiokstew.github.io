@@ -2,37 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Studio K-Stew</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background: black;
-      color: white;
-      overflow: hidden;
-    }
-
-    .background-wrapper {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 90vw;
-      height: 90vh;
-      transform: translate(-50%, -50%);
-      border: 10px solid white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 30px rgba(255,255,255,0.15);
-      pointer-events: none;
-      z-index: -1;
-    }
-
+    /* Background slideshow layers */
     .bg-slide {
       position: absolute;
       width: 100%;
@@ -41,195 +15,115 @@
       background-position: center;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
+      z-index: -2;
     }
 
     .bg-slide.visible {
       opacity: 1;
-      z-index: 1;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background-color: rgba(255,255,255,0.95);
-      backdrop-filter: blur(6px);
-      padding: 12px 25px;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #222;
-      text-align: center;
-      user-select: none;
-    }
-
-    #hero-container {
-      max-width: 900px;
-      margin: 40px auto 60px;
-      padding: 0 20px;
-      text-align: center;
-      color: white;
-      user-select: none;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero-text {
-      transition: opacity 1s ease;
-      font-size: 1.1rem;
-      line-height: 1.5;
-    }
-
-    .hero-text.fade-out {
-      opacity: 0;
-    }
-
-    .instagram-button {
-      margin: 20px 0;
-    }
-
-    .instagram-button a img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.4));
-      transition: transform 0.3s ease;
-    }
-
-    .instagram-button a img:hover {
-      transform: scale(1.1);
-    }
-
-    .buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .button {
-      background-color: #333;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-      user-select: none;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .button:hover,
-    .button:focus {
-      background-color: white;
-      color: #333;
-      outline: none;
-    }
-
-    footer {
-      text-align: center;
-      padding: 15px 0;
-      color: #888;
-      user-select: none;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
+  <!-- Background -->
+  <div class="background-wrapper"></div>
 
-  <div class="background-wrapper" id="background-wrapper" aria-hidden="true"></div>
+  <!-- Sticky Header -->
+  <header class="site-header">Studio K-Stew</header>
 
-  <div class="site-header">Studio K-Stew</div>
-
+  <!-- Hero Text & Buttons -->
   <div id="hero-container">
-    <div class="hero-text">
-      <h1>Welcome to Studio K-Stew</h1>
-      <p>
-        I'm Kyle 'K-Stew' Stewart — a New England-based photographer drawn to bold landscapes, remote places, and stunning wildlife.<br><br>
-        I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges,<br>
-        and my action work documenting windsurfers during Hurricane Dorian was featured in <em>Windsurfing Now</em> magazine.<br><br>
-        My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
-      </p>
+    <div class="hero-text" id="hero-text">
+      <h2>Photography by Kyle D. Stewart</h2>
+      <p>Landscapes, Wildlife, Travel, and Stories From the Field</p>
     </div>
-
     <div class="instagram-button">
-      <a href="https://www.instagram.com/studiokstew" target="_blank" aria-label="Instagram">
+      <a href="https://www.instagram.com/studiokstew" target="_blank">
         <img src="Instagram_icon.png" alt="Instagram" />
       </a>
     </div>
-
     <div class="buttons">
       <a href="wildlife.html" class="button">Wildlife</a>
       <a href="landscapes.html" class="button">Landscapes</a>
-      <a href="portraits.html" class="button">Portraits</a>
-      <a href="sports.html" class="button">Sports</a>
-      <a href="about.html" class="button">About Me</a>
+      <a href="people.html" class="button">People</a>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>&copy; 2025 Studio K-Stew</footer>
 
+  <!-- Background Slideshow Script -->
   <script>
-    // Background slideshow from manifest.json
-    const wrapper = document.getElementById('background-wrapper');
-    let slideElements = [];
-    let currentSlide = 0;
+    const wrapper = document.querySelector('.background-wrapper');
+    let images = [];
+    let current = 0;
+    let slideA, slideB;
+    let showingA = true;
 
-    async function loadBackgroundImages() {
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    async function startSlideshow() {
       try {
         const res = await fetch('/portfolio/manifest.json');
-        const files = await res.json();
-        const imageFiles = files.filter(file => /\.(jpe?g|png|webp)$/i.test(file));
+        const allImages = await res.json();
+        images = allImages.filter(name =>
+          /\.(jpe?g|png|webp)$/i.test(name)
+        ).map(name => `/portfolio/${name}`);
 
-        imageFiles.forEach((filename, index) => {
-          const div = document.createElement('div');
-          div.className = 'bg-slide';
-          div.style.backgroundImage = `url('/portfolio/${filename}')`;
-          if (index === 0) div.classList.add('visible');
-          wrapper.appendChild(div);
-        });
+        images = shuffleArray(images);
 
-        slideElements = document.querySelectorAll('.bg-slide');
-        setInterval(cycleSlides, 8000);
-      } catch (e) {
-        console.error("Error loading manifest.json:", e);
+        slideA = document.createElement('div');
+        slideB = document.createElement('div');
+        slideA.className = 'bg-slide visible';
+        slideB.className = 'bg-slide';
+        wrapper.appendChild(slideA);
+        wrapper.appendChild(slideB);
+
+        slideA.style.backgroundImage = `url('${images[0]}')`;
+        current = 1;
+
+        setInterval(() => {
+          const nextImg = images[current % images.length];
+          const nextSlide = showingA ? slideB : slideA;
+          const currentSlide = showingA ? slideA : slideB;
+
+          nextSlide.style.backgroundImage = `url('${nextImg}')`;
+          nextSlide.classList.add('visible');
+          currentSlide.classList.remove('visible');
+
+          showingA = !showingA;
+          current++;
+        }, 6000);
+      } catch (err) {
+        console.error('Error loading background images:', err);
       }
     }
 
-    function cycleSlides() {
-      if (slideElements.length === 0) return;
-      slideElements[currentSlide].classList.remove('visible');
-      currentSlide = (currentSlide + 1) % slideElements.length;
-      slideElements[currentSlide].classList.add('visible');
-    }
+    startSlideshow();
+  </script>
 
-    loadBackgroundImages();
+  <!-- Fade-out hero text on idle -->
+  <script>
+    let fadeTimer;
+    const heroText = document.getElementById('hero-text');
 
-    // Hero fade on inactivity
-    const heroText = document.querySelector('.hero-text');
-    let fadeTimeout;
-    let faded = false;
-
-    function fadeOutText() {
-      if (!faded) {
+    function resetFade() {
+      heroText.classList.remove('fade-out');
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(() => {
         heroText.classList.add('fade-out');
-        faded = true;
-      }
+      }, 4000);
     }
 
-    function fadeInText() {
-      if (faded) {
-        heroText.classList.remove('fade-out');
-        faded = false;
-      }
-    }
-
-    function resetFadeTimer() {
-      clearTimeout(fadeTimeout);
-      fadeInText();
-      fadeTimeout = setTimeout(fadeOutText, 10000);
-    }
-
-    document.addEventListener('mousemove', resetFadeTimer);
-    resetFadeTimer();
+    document.addEventListener('mousemove', resetFade);
+    document.addEventListener('keydown', resetFade);
+    resetFade();
   </script>
 </body>
 </html>
