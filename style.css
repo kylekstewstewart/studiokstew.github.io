@@ -1,4 +1,4 @@
-/* Reset & base styling */
+/* Base styling */
 body, html {
   margin: 0;
   padding: 0;
@@ -6,10 +6,10 @@ body, html {
   font-family: Arial, sans-serif;
   background-color: transparent;
   color: white;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
-/* Background image container with white border "TV frame" */
+/* Background "TV frame" wrapper */
 .background-wrapper {
   position: fixed;
   top: 50%;
@@ -25,120 +25,59 @@ body, html {
   pointer-events: none;
 }
 
-/* Background image itself */
+/* Background image inside the TV frame */
 .background-image {
   width: 100%;
   height: 100%;
-  background-image: url('kstewlandingpage.jpeg');
-  background-color: black;
+  background-image: url('your-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position: fixed;
+  background-color: black;
+}
+
+/* Sticky header */
+header {
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: -3;
-}
-
-/* Site Header */
-.site-header {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: black;
-  text-shadow: 1px 1px 2px white;
   z-index: 20;
-  user-select: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Hero container */
-#hero-container {
-  position: relative;
-  max-width: 900px;
-  margin: 20vh auto 0;
-  text-align: center;
-  z-index: 10;
-  padding: 0 20px;
-}
-
-/* Hero heading */
-.hero-text h1 {
-  font-size: 2.5rem;
+header h1,
+.page-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: black;
   font-weight: bold;
-  margin-bottom: 1rem;
-  color: white;
-  transition: opacity 2s ease;
 }
 
-/* Hero paragraph */
-.hero-text p {
-  color: white;
-  font-size: 1.3rem;
-  max-width: 700px;
-  margin: 0 auto 2rem auto;
-  line-height: 1.6;
-  opacity: 1;
-  transition: opacity 2s ease;
+/* Header icons/buttons */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Fade out class for hero text */
-.hero-text.fade-out h1,
-.hero-text.fade-out p {
-  opacity: 0;
-}
-
-/* Instagram Button Container */
-.instagram-button {
+.icon {
   width: 32px;
   height: 32px;
-  margin: 0 auto 20px;
 }
 
-.instagram-button a {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-}
-
-.instagram-button img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.instagram-button img:hover {
-  transform: scale(1.1);
-}
-
-/* Buttons container */
-.buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  z-index: 15;
-  position: relative;
-  margin-top: 10px;
-}
-
-/* Regular buttons */
 .button {
-  display: inline-block;
-  padding: 10px 22px;
-  border: 2px solid white;
+  background-color: #333;
   color: white;
-  background-color: transparent;
-  font-weight: bold;
-  border-radius: 15px;
+  padding: 8px 12px;
   text-decoration: none;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  user-select: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
@@ -146,16 +85,87 @@ body, html {
   color: black;
 }
 
-/* Footer */
-footer {
-  position: fixed;
-  bottom: 10px;
+/* Image gallery grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
+
+/* Each image frame */
+.image-frame {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Gallery images */
+.image-frame img {
   width: 100%;
-  text-align: center;
-  font-size: 14px;
-  color: #888888; /*medium grey */
-  z-index: 1;
-  text-shadow: none;
-  background-color: transparent;
-  padding: 5px 0;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.image-frame img:hover {
+  transform: scale(1.03);
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  flex-direction: row;
+}
+
+.lightbox-overlay.show {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* Lightbox navigation buttons */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+/* Optional: Scrollbar styling (modern browsers) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 }
