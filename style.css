@@ -1,18 +1,13 @@
 /* Reset & base styling */
-html, body {
-  height: 100%;
+body, html {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: Arial, sans-serif;
   background-color: transparent;
   color: white;
-  overflow: hidden;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Background image container with white border "TV frame" */
@@ -44,35 +39,39 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -3;
 }
 
-/* Hero container */
-#hero-container {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 2rem 3rem;
-  border-radius: 10px;
-  max-width: 700px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Foreground content container */
+#content {
+  position: relative;
   z-index: 10;
+  text-align: center;
+  padding: 10vh 20px 40px;
 }
 
-/* Hero text with fade */
+/* Header styling */
+#content h1 {
+  color: black;
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0 0 1rem 0;
+  user-select: none;
+}
+
+/* Hero paragraph styling */
 .hero-text {
-  color: white;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
   line-height: 1.6;
-  margin-bottom: 2rem;
+  color: white;
   opacity: 1;
-  transition: opacity 1.5s ease-in-out;
+  transition: opacity 2s ease;
 }
 
+/* Fade out effect for hero paragraph */
 .hero-text.fade-out {
   opacity: 0;
-  pointer-events: none;
 }
 
 /* Buttons container */
@@ -85,7 +84,7 @@ body {
   z-index: 11;
 }
 
-/* Buttons style */
+/* Button styles */
 .button {
   min-height: 48px;
   padding: 0 20px;
@@ -99,6 +98,10 @@ body {
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .button:hover {
@@ -106,20 +109,51 @@ body {
   color: black;
 }
 
-/* Instagram button */
-.instagram-button img {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
-  filter: brightness(100%);
+/* Instagram button container */
+.instagram-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 8px 12px;
+  background: transparent;
   cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   pointer-events: auto;
-  border: none;
+  height: 48px;  /* Match other buttons height */
+  width: 48px;   /* Square container */
+  box-sizing: border-box;
+}
+
+.instagram-button img {
+  max-width: 24px;
+  max-height: 24px;
+  object-fit: contain;
+  filter: brightness(100%);
   transition: filter 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.instagram-button:hover {
+  background-color: white;
+  border-color: white;
 }
 
 .instagram-button:hover img {
-  filter: brightness(70%);
+  filter: brightness(0);
+}
+
+/* Fade in/out for content */
+#content.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+#content.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 /* Footer */
@@ -130,5 +164,25 @@ footer {
   text-align: center;
   font-size: 14px;
   color: white;
-  z-index: 15;
+  z-index: 10;
+  user-select: none;
+}
+
+/* Responsive for small screens */
+@media (max-width: 480px) {
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .instagram-button {
+    width: 48px;
+    height: 48px;
+  }
+  #content h1 {
+    font-size: 2.5rem;
+  }
+  .hero-text {
+    font-size: 1.1rem;
+    max-width: 90vw;
+  }
 }
