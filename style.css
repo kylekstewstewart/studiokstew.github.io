@@ -60,6 +60,13 @@ body, html {
   transition: opacity 0.5s ease;
 }
 
+#content > h1 {
+  color: black;
+  font-size: 4rem;  /* bigger size, adjust as you like */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
 /* Buttons */
 .buttons {
   margin-top: 30px;
@@ -198,7 +205,7 @@ footer {
 }
 .hero-overlay-text {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.5);
@@ -207,20 +214,16 @@ footer {
   color: white;
   text-align: center;
   z-index: 10;
-  max-width: 90%;
-  width: 700px;
+  max-width: 700px;
+  width: 90%;
   font-size: 1.1rem;
   line-height: 1.6;
+
+  pointer-events: none; /* Let clicks pass through */
 }
 
-.hero-overlay-text h1 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
-}
-
-.hero-overlay-text p {
-  margin-bottom: 1.5rem;
+.hero-overlay-text * {
+  pointer-events: auto; /* Enable interaction on text itself */
 }
 
 .cta-button {
