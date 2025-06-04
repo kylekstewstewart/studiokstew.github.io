@@ -4,77 +4,234 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Studio K-Stew</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-y: auto;
+      background: black;
+      color: #222;
+    }
+
+    /* Background slideshow wrapper */
+    .background-wrapper {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 90vw;
+      height: 90vh;
+      transform: translate(-50%, -50%);
+      border: 10px solid white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255,255,255,0.15);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Each background image */
+    .bg-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .bg-slide.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* Site header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      padding: 12px 25px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #222;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Hero container */
+    #hero-container {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+      text-align: center;
+      color: white;
+      user-select: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Hero text */
+    .hero-text {
+      transition: opacity 1s ease;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .hero-text.fade-out {
+      opacity: 0;
+    }
+
+    /* Instagram button */
+    .instagram-button {
+      margin: 20px 0;
+    }
+    .instagram-button a img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.4));
+      transition: transform 0.3s ease;
+    }
+    .instagram-button a img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Navigation buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .button {
+      background-color: #333;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      user-select: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .button:hover,
+    .button:focus {
+      background-color: white;
+      color: #333;
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      color: #888;
+      user-select: none;
+    }
+
+  </style>
 </head>
 <body>
+
+  <!-- Background wrapper -->
   <div class="background-wrapper" aria-hidden="true">
-    <div class="background-image"></div>
+    <div class="bg-slide" style="background-image: url('bg1.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('bg2.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('bg3.jpg');"></div>
+    <div class="bg-slide" style="background-image: url('bg4.jpg');"></div>
   </div>
 
   <!-- Header -->
-  <header class="site-header" role="banner">
-    <h1>Studio K-Stew</h1>
-  </header>
+  <div class="site-header">Studio K-Stew</div>
 
-  <!-- Main hero content -->
-  <main id="hero-container" role="main">
-    <section class="hero-text" aria-live="polite">
-      <h2>Welcome to Studio K-Stew</h2>
+  <!-- Hero container -->
+  <div id="hero-container">
+    <div class="hero-text">
+      <h1>Welcome to Studio K-Stew</h1>
       <p>
         I'm Kyle 'K-Stew' Stewart — a New England-based photographer drawn to bold landscapes, remote places, and stunning wildlife.<br><br>
         I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges,<br>
         and my action work documenting windsurfers during Hurricane Dorian was featured in <em>Windsurfing Now</em> magazine.<br><br>
         My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
       </p>
-    </section>
+    </div>
 
-    <!-- Instagram button -->
-    <aside class="instagram-button" aria-label="Instagram link">
-      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer" aria-label="Visit Studio K-Stew Instagram page">
-        <img src="Instagram_icon.png" alt="Instagram icon" />
+    <!-- Instagram -->
+    <div class="instagram-button">
+      <a href="https://www.instagram.com/studiokstew" target="_blank" aria-label="Instagram">
+        <img src="Instagram_icon.png" alt="Instagram" />
       </a>
-    </aside>
+    </div>
 
     <!-- Navigation buttons -->
-    <nav class="buttons" role="navigation" aria-label="Primary site navigation">
+    <div class="buttons">
       <a href="wildlife.html" class="button">Wildlife</a>
       <a href="landscapes.html" class="button">Landscapes</a>
       <a href="portraits.html" class="button">Portraits</a>
       <a href="sports.html" class="button">Sports</a>
       <a href="about.html" class="button">About Me</a>
-    </nav>
-  </main>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer role="contentinfo">&copy; 2025 Studio K-Stew</footer>
+  <footer>&copy; 2025 Studio K-Stew</footer>
 
-  <!-- Fade logic -->
+  <!-- Scripts -->
   <script>
+    // Background slideshow logic
+    const slides = document.querySelectorAll('.bg-slide');
+    let currentSlide = 0;
+    const slideCount = slides.length;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('visible', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      showSlide(currentSlide);
+    }
+
+    showSlide(currentSlide);
+    setInterval(nextSlide, 8000);
+
+    // Hero text fade logic
     const heroText = document.querySelector('.hero-text');
-    let hasFaded = false;
+    let fadeTimeout;
+    let faded = false;
 
     function fadeOutText() {
-      if (!hasFaded) {
+      if (!faded) {
         heroText.classList.add('fade-out');
-        hasFaded = true;
+        faded = true;
       }
     }
 
     function fadeInText() {
-      heroText.classList.remove('fade-out');
-      hasFaded = false;
+      if (faded) {
+        heroText.classList.remove('fade-out');
+        faded = false;
+      }
     }
 
-    // Auto fade after 10s of no mouse movement
-    let fadeTimeout = setTimeout(fadeOutText, 10000);
-
-    document.addEventListener('mousemove', () => {
+    function resetFadeTimer() {
       clearTimeout(fadeTimeout);
-      if (hasFaded) {
-        fadeInText();
-      }
+      fadeInText();
       fadeTimeout = setTimeout(fadeOutText, 10000);
-    });
+    }
+
+    document.addEventListener('mousemove', resetFadeTimer);
+
+    resetFadeTimer();
   </script>
 </body>
 </html>
