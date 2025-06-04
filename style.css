@@ -68,10 +68,12 @@ header {
   gap: 15px;
 }
 
-/* Instagram icon */
-.icon {
-  width: 28px;
-  height: 28px;
+/* Instagram icon forced size */
+.instagram-button img,
+.header-icons img.icon {
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: contain;
   display: block;
 }
 
