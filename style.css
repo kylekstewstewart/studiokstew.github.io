@@ -1,13 +1,18 @@
 /* Reset & base styling */
-body, html {
-  margin: 0;
-  padding: 0;
+html, body {
   height: 100%;
+  margin: 0;
   font-family: Arial, sans-serif;
   background-color: transparent;
   color: white;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
 }
 
 /* Background image container with white border "TV frame" */
@@ -39,52 +44,61 @@ body, html {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -3;
 }
 
-/* Foreground content container */
-#content {
-  position: relative;
-  z-index: 1;
+/* Hero container */
+#hero-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  max-width: 700px;
   text-align: center;
-  padding: 10vh 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
 }
 
-/* Fade in/out */
-#content.fade-out {
-  opacity: 0;
-  transition: opacity 2s ease;
-}
-
-#content.fade-in {
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-
-#content > h1 {
-  color: black;
-  font-size: 4rem;  /* bigger size, adjust as you like */
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-/* Buttons */
-.buttons {
-  margin-top: 30px;
-}
-
-.button {
-  display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
+/* Hero text with fade */
+.hero-text {
   color: white;
-  background-color: transparent;
-  border: 2px solid white;
-  text-decoration: none;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.hero-text.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Buttons container */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 11;
+}
+
+/* Buttons style */
+.button {
+  min-height: 48px;
+  padding: 0 20px;
+  line-height: 48px;
   font-weight: bold;
   border-radius: 15px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
   pointer-events: auto;
-  z-index: 1;
 }
 
 .button:hover {
@@ -92,79 +106,20 @@ body, html {
   color: black;
 }
 
-/* Instagram icon */
-.icon {
+/* Instagram button */
+.instagram-button img {
   width: 32px;
   height: 32px;
-  margin: 10px;
   vertical-align: middle;
-}
-
-/* Gallery layout */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 40px;
-  padding: 0 20px 60px;
-}
-
-/* Image frame styling */
-.image-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  overflow: hidden;
-  padding: 10px;
-  transition: transform 0.3s ease;
-  border: 4px solid white;
-}
-
-.image-frame:hover {
-  transform: scale(1.02);
-}
-
-/* Image styling */
-.image-frame img {
-  max-width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border-radius: 15px;
-  display: block;
+  filter: brightness(100%);
   cursor: pointer;
+  pointer-events: auto;
+  border: none;
+  transition: filter 0.3s ease;
 }
 
-/* Lightbox overlay */
-.lightbox-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.lightbox-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-}
-
-.lightbox-overlay.show {
-  display: flex;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.instagram-button:hover img {
+  filter: brightness(70%);
 }
 
 /* Footer */
@@ -175,78 +130,5 @@ footer {
   text-align: center;
   font-size: 14px;
   color: white;
-  z-index: 1;
-}
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 1001;
-}
-
-.lightbox-prev {
-  left: 20px;
-}
-
-.lightbox-next {
-  right: 20px;
-}
-.page-title {
-  font-weight: 700;
-  color: #000;
-  font-size: 1.75rem;
-}
-.hero-overlay-text {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-  z-index: 10;
-  max-width: 700px;
-  width: 90%;
-  font-size: 1.1rem;
-  line-height: 1.6;
-
-  pointer-events: none; /* Let clicks pass through */
-}
-
-.hero-overlay-text * {
-  pointer-events: auto; /* Enable interaction on text itself */
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: #e63946;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #d62828;
-}
-
-footer {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  color: white;
-  z-index: 1;
+  z-index: 15;
 }
