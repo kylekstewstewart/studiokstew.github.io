@@ -9,7 +9,7 @@ body, html {
   height: 100%;
   font-family: Arial, sans-serif;
   background-color: transparent;
-  color: #222; /* dark text for header */
+  color: #222; /* Dark text for header and body */
   overflow-y: auto;
 }
 
@@ -40,51 +40,88 @@ body, html {
   background-color: black;
 }
 
-/* Sticky header */
-header {
+/* Site header */
+.site-header {
   position: sticky;
   top: 0;
-  z-index: 20;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(6px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 12px 25px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.page-title {
-  font-size: 1.6rem;
+  text-align: center;
   font-weight: 700;
+  font-size: 2rem;
   color: #222;
-  margin: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 20;
 }
 
-/* Header icons container */
-.header-icons {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+/* Hero container */
+#hero-container {
+  max-width: 900px;
+  margin: 40px auto 80px auto;
+  padding: 0 20px;
+  text-align: center;
+  position: relative;
 }
 
-/* Instagram icon forced size */
-.instagram-button img,
-.header-icons img.icon {
-  width: 28px !important;
-  height: 28px !important;
+/* Hero text */
+.hero-text h2 {
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.hero-text p {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #333;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Fade-out effect */
+.fade-out {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+}
+
+/* Instagram button */
+.instagram-button {
+  margin: 25px auto 40px;
+  width: 48px;
+  height: 48px;
+}
+
+.instagram-button a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.instagram-button img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
 
-/* Buttons */
+/* Navigation buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .button {
   background-color: #333;
   color: white;
-  padding: 8px 14px;
+  padding: 10px 20px;
   text-decoration: none;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
   user-select: none;
 }
@@ -94,97 +131,15 @@ header {
   background-color: white;
   color: #333;
   outline: none;
-}
-
-/* Gallery grid */
-.gallery {
-  max-width: 1200px;
-  margin: 25px auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 22px;
-  overflow-y: auto;
-}
-
-/* Individual image frame */
-.image-frame {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 5px solid white;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-/* Images inside the frame */
-.image-frame img {
-  max-width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  transition: transform 0.3s ease;
   cursor: pointer;
 }
 
-.image-frame img:hover {
-  transform: scale(1.05);
-}
-
-/* Lightbox overlay */
-.lightbox-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.lightbox-overlay.show {
-  display: flex;
-}
-
-.lightbox-overlay img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 6px;
-}
-
-/* Lightbox nav buttons */
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 3rem;
-  cursor: pointer;
-  padding: 10px 20px;
-  user-select: none;
-  transition: color 0.3s ease;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-  color: #ccc;
-}
-
-.lightbox-prev {
-  left: 25px;
-}
-
-.lightbox-next {
-  right: 25px;
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
 }
 
 /* Scrollbar styling for WebKit */
