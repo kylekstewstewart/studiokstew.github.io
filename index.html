@@ -19,7 +19,6 @@
       color: #222;
     }
 
-    /* Background slideshow wrapper */
     .background-wrapper {
       position: fixed;
       top: 50%;
@@ -177,10 +176,31 @@
 
   <!-- Scripts -->
   <script>
-    // Background slideshow using manifest.json
     const wrapper = document.getElementById('background-wrapper');
     let slides = [];
     let currentSlide = 0;
+
+    // Load image filenames manually for now
+    const filenames = [
+      "kstew1.jpg",
+      "kstew2.jpg",
+      "kstew3.jpg",
+      "kstew4.jpg",
+      "kstew5.jpg",
+      "kstew6.jpg",
+      "kstew7.jpg",
+      "kstew8.jpg",
+      "kstew9.jpg",
+      "kstew10.jpg"
+    ];
+
+    filenames.forEach(filename => {
+      const slide = document.createElement('div');
+      slide.className = 'bg-slide';
+      slide.style.backgroundImage = `url('portfolio/${filename}')`;
+      wrapper.appendChild(slide);
+      slides.push(slide);
+    });
 
     function showSlide(index) {
       slides.forEach((slide, i) => {
@@ -192,46 +212,11 @@
       currentSlide = (currentSlide + 1) % slides.length;
       showSlide(currentSlide);
     }
-<script>
-  const wrapper = document.getElementById('background-wrapper');
-  const slides = [];
 
-  const filenames = ['kstew1.jpg', 'kstew2.jpg']; // test manually
-
-  filenames.forEach(filename => {
-    const slide = document.createElement('div');
-    slide.className = 'bg-slide';
-    slide.style.backgroundImage = `url('portfolio/${filename}')`;
-    wrapper.appendChild(slide);
-    slides.push(slide);
-  });
-
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('visible', i === index);
-    });
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-
-  let currentSlide = 0;
-  if (slides.length > 0) {
-    showSlide(0);
-    setInterval(nextSlide, 8000);
-  }
-</script>
-
-
-
-        if (slides.length > 0) {
-          showSlide(0);
-          setInterval(nextSlide, 8000);
-        }
-      })
-      .catch(err => console.error('Error loading slideshow images:', err));
+    if (slides.length > 0) {
+      showSlide(0);
+      setInterval(nextSlide, 8000);
+    }
 
     // Fade hero text on inactivity
     const heroText = document.querySelector('.hero-text');
