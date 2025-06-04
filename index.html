@@ -6,7 +6,6 @@
   <title>Studio K-Stew</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Background slideshow layers */
     .bg-slide {
       position: absolute;
       width: 100%;
@@ -14,7 +13,7 @@
       background-size: cover;
       background-position: center;
       opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      transition: opacity 2s ease-in-out;
       z-index: -2;
     }
 
@@ -55,10 +54,14 @@
   <!-- Background Slideshow Script -->
   <script>
     const wrapper = document.querySelector('.background-wrapper');
+    const defaultImage = 'kstewlandingpage.jpeg';
+
     let images = [];
-    let current = 0;
-    let slideA, slideB;
+    let current = 1;
     let showingA = true;
+    let slideA, slideB;
+    let slideshowInterval = null;
+    let idleTimer = null;
 
     function shuffleArray(arr) {
       for (let i = arr.length - 1; i > 0; i--) {
@@ -68,14 +71,11 @@
       return arr;
     }
 
-    async function startSlideshow() {
+    async function initSlideshow() {
       try {
         const res = await fetch('/portfolio/manifest.json');
         const allImages = await res.json();
-        images = allImages.filter(name =>
-          /\.(jpe?g|png|webp)$/i.test(name)
-        ).map(name => `/portfolio/${name}`);
-
+        images = allImages.filter(name => /\.(jpe?g|png|webp)$/i.test(name)).map(name => `/portfolio/${name}`);
         images = shuffleArray(images);
 
         slideA = document.createElement('div');
@@ -85,45 +85,73 @@
         wrapper.appendChild(slideA);
         wrapper.appendChild(slideB);
 
-        slideA.style.backgroundImage = `url('${images[0]}')`;
-        current = 1;
+        slideA.style.backgroundImage = `url('${defaultImage}')`;
 
-        setInterval(() => {
-          const nextImg = images[current % images.length];
-          const nextSlide = showingA ? slideB : slideA;
-          const currentSlide = showingA ? slideA : slideB;
-
-          nextSlide.style.backgroundImage = `url('${nextImg}')`;
-          nextSlide.classList.add('visible');
-          currentSlide.classList.remove('visible');
-
-          showingA = !showingA;
-          current++;
-        }, 6000);
+        startSlideshow();
       } catch (err) {
         console.error('Error loading background images:', err);
       }
     }
 
-    startSlideshow();
+    function startSlideshow() {
+      stopSlideshow(); // Ensure no duplicates
+      slideshowInterval = setInterval(() => {
+        const nextImage = images[current % images.length];
+        const nextSlide = showingA ? slideB : slideA;
+        const currentSlide = showingA ? slideA : slideB;
+
+        nextSlide.style.backgroundImage = `url('${nextImage}')`;
+        nextSlide.classList.add('visible');
+        currentSlide.classList.remove('visible');
+
+        showingA = !showingA;
+        current++;
+      }, 30000); // every 30s
+    }
+
+    function stopSlideshow() {
+      clearInterval(slideshowInterval);
+    }
+
+    function resetToDefaultBackground() {
+      stopSlideshow();
+
+      const activeSlide = showingA ? slideA : slideB;
+      const hiddenSlide = showingA ? slideB : slideA;
+
+      hiddenSlide.style.backgroundImage = `url('${defaultImage}')`;
+      hiddenSlide.classList.add('visible');
+      activeSlide.classList.remove('visible');
+      showingA = !showingA;
+    }
+
+    initSlideshow();
   </script>
 
-  <!-- Fade-out hero text on idle -->
+  <!-- Fade-out Hero Text and Background Reset -->
   <script>
-    let fadeTimer;
     const heroText = document.getElementById('hero-text');
+    let fadeTimer, resumeTimer;
 
     function resetFade() {
       heroText.classList.remove('fade-out');
       clearTimeout(fadeTimer);
+      clearTimeout(resumeTimer);
+
+      resetToDefaultBackground(); // Reset background immediately
+
       fadeTimer = setTimeout(() => {
         heroText.classList.add('fade-out');
-      }, 4000);
+
+        resumeTimer = setTimeout(() => {
+          startSlideshow();
+        }, 4000); // Resume slideshow after 4s of fade
+      }, 4000); // Start fading after 4s idle
     }
 
     document.addEventListener('mousemove', resetFade);
     document.addEventListener('keydown', resetFade);
-    resetFade();
+    resetFade(); // Run on first load
   </script>
 </body>
 </html>
