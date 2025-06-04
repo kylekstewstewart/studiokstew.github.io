@@ -47,101 +47,102 @@
     <footer>© 2025 Studio K-Stew</footer>
 
     <!-- Scripts -->
-    <script>
-        const wrapper = document.getElementById('background-wrapper');
-        let slides = [];
-        let currentSlide = 0;
-        let isSlideshowActive = false;
-        let slideshowInterval = null;
-        let portfolioIndex = 0;
+<script>
+    const wrapper = document.getElementById('background-wrapper');
+    let slides = [];
+    let currentSlide = 0;
+    let isSlideshowActive = false;
+    let slideshowInterval = null;
+    let portfolioIndex = 0;
 
-        const slidePaths = [
-            "kstewlandingpage.jpeg",
-            "portfolio/kstew1.jpg",
-            "portfolio/kstew2.jpg",
-            "portfolio/kstew3.jpg",
-            "portfolio/kstew4.jpg",
-            "portfolio/kstew5.jpg",
-            "portfolio/kstew6.jpg",
-            "portfolio/kstew7.jpg",
-            "portfolio/kstew8.jpg",
-            "portfolio/kstew9.jpg",
-            "portfolio/kstew10.jpg"
-        ];
+    const slidePaths = [
+        "/kstewlandingpage.jpeg",  // Absolute path to ensure root access
+        "/portfolio/kstew1.jpg",
+        "/portfolio/kstew2.jpg",
+        "/portfolio/kstew3.jpg",
+        "/portfolio/kstew4.jpg",
+        "/portfolio/kstew5.jpg",
+        "/portfolio/kstew6.jpg",
+        "/portfolio/kstew7.jpg",
+        "/portfolio/kstew8.jpg",
+        "/portfolio/kstew9.jpg",
+        "/portfolio/kstew10.jpg"
+    ];
 
-        const numPortfolioSlides = slidePaths.length - 1;
+    const numPortfolioSlides = slidePaths.length - 1;
 
-        slidePaths.forEach(path => {
-            const slide = document.createElement('div');
-            slide.className = 'bg-slide';
-            slide.style.backgroundImage = `url('${path}')`;
-            wrapper.appendChild(slide);
-            slides.push(slide);
+    slidePaths.forEach(path => {
+        const slide = document.createElement('div');
+        slide.className = 'bg-slide';
+        slide.style.backgroundImage = `url('${path}')`;
+        slide.onerror = () => console.error(`Failed to load image: ${path}`);
+        wrapper.appendChild(slide);
+        slides.push(slide);
+    });
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('visible', i === index);
         });
+    }
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('visible', i === index);
-            });
-        }
+    function nextSlide() {
+        portfolioIndex = (portfolioIndex + 1) % numPortfolioSlides;
+        currentSlide = 1 + portfolioIndex;
+        showSlide(currentSlide);
+    }
 
-        function nextSlide() {
-            portfolioIndex = (portfolioIndex + 1) % numPortfolioSlides;
+    function startSlideshow() {
+        if (!isSlideshowActive) {
+            isSlideshowActive = true;
+            portfolioIndex = 0;
             currentSlide = 1 + portfolioIndex;
             showSlide(currentSlide);
+            slideshowInterval = setInterval(nextSlide, 8000);
         }
+    }
 
-        function startSlideshow() {
-            if (!isSlideshowActive) {
-                isSlideshowActive = true;
-                portfolioIndex = 0;
-                currentSlide = 1 + portfolioIndex;
-                showSlide(currentSlide);
-                slideshowInterval = setInterval(nextSlide, 8000);
-            }
-        }
-
-        function stopSlideshow() {
-            if (isSlideshowActive) {
-                isSlideshowActive = false;
-                clearInterval(slideshowInterval);
-                slideshowInterval = null;
-                showSlide(0);
-            }
-        }
-
-        if (slides.length > 0) {
+    function stopSlideshow() {
+        if (isSlideshowActive) {
+            isSlideshowActive = false;
+            clearInterval(slideshowInterval);
+            slideshowInterval = null;
             showSlide(0);
         }
+    }
 
-        const heroText = document.querySelector('.hero-text');
-        let fadeTimeout;
-        let faded = false;
+    if (slides.length > 0) {
+        showSlide(0);
+    }
 
-        function fadeOutText() {
-            if (!faded) {
-                heroText.classList.add('fade-out');
-                faded = true;
-                startSlideshow();
-            }
+    const heroText = document.querySelector('.hero-text');
+    let fadeTimeout;
+    let faded = false;
+
+    function fadeOutText() {
+        if (!faded) {
+            heroText.classList.add('fade-out');
+            faded = true;
+            startSlideshow();
         }
+    }
 
-        function fadeInText() {
-            if (faded) {
-                heroText.classList.remove('fade-out');
-                faded = false;
-            }
+    function fadeInText() {
+        if (faded) {
+            heroText.classList.remove('fade-out');
+            faded = false;
         }
+    }
 
-        function resetFadeTimer() {
-            clearTimeout(fadeTimeout);
-            fadeInText();
-            stopSlideshow();
-            fadeTimeout = setTimeout(fadeOutText, 10000);
-        }
+    function resetFadeTimer() {
+        clearTimeout(fadeTimeout);
+        fadeInText();
+        stopSlideshow();
+        fadeTimeout = setTimeout(fadeOutText, 10000);
+    }
 
-        document.addEventListener('mousemove', resetFadeTimer);
-        resetFadeTimer();
-    </script>
+    document.addEventListener('mousemove', resetFadeTimer);
+    resetFadeTimer();
+</script>
 </body>
 </html>
