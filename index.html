@@ -172,32 +172,39 @@
   </div>
 
   <!-- Footer -->
-  <footer>&copy; 2025 Studio K-Stew</footer>
+  <footer>© 2025 Studio K-Stew</footer>
 
   <!-- Scripts -->
   <script>
     const wrapper = document.getElementById('background-wrapper');
     let slides = [];
     let currentSlide = 0;
+    let isSlideshowActive = false;
+    let slideshowInterval = null;
+    let portfolioIndex = 0;
 
-    // Load image filenames manually for now
-    const filenames = [
-      "kstew1.jpg",
-      "kstew2.jpg",
-      "kstew3.jpg",
-      "kstew4.jpg",
-      "kstew5.jpg",
-      "kstew6.jpg",
-      "kstew7.jpg",
-      "kstew8.jpg",
-      "kstew9.jpg",
-      "kstew10.jpg"
+    // Define slide paths including default background and portfolio images
+    const slidePaths = [
+      "kstewlandingpage.jpeg",
+      "portfolio/kstew1.jpg",
+      "portfolio/kstew2.jpg",
+      "portfolio/kstew3.jpg",
+      "portfolio/kstew4.jpg",
+      "portfolio/kstew5.jpg",
+      "portfolio/kstew6.jpg",
+      "portfolio/kstew7.jpg",
+      "portfolio/kstew8.jpg",
+      "portfolio/kstew9.jpg",
+      "portfolio/kstew10.jpg"
     ];
 
-    filenames.forEach(filename => {
+    const numPortfolioSlides = slidePaths.length - 1;
+
+    // Create slides
+    slidePaths.forEach(path => {
       const slide = document.createElement('div');
       slide.className = 'bg-slide';
-      slide.style.backgroundImage = `url('portfolio/${filename}')`;
+      slide.style.backgroundImage = `url('${path}')`;
       wrapper.appendChild(slide);
       slides.push(slide);
     });
@@ -209,13 +216,33 @@
     }
 
     function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
+      portfolioIndex = (portfolioIndex + 1) % numPortfolioSlides;
+      currentSlide = 1 + portfolioIndex;
       showSlide(currentSlide);
     }
 
+    function startSlideshow() {
+      if (!isSlideshowActive) {
+        isSlideshowActive = true;
+        portfolioIndex = 0;
+        currentSlide = 1 + portfolioIndex;
+        showSlide(currentSlide);
+        slideshowInterval = setInterval(nextSlide, 8000);
+      }
+    }
+
+    function stopSlideshow() {
+      if (isSlideshowActive) {
+        isSlideshowActive = false;
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+        showSlide(0);
+      }
+    }
+
+    // Initially show slide 0 (default background)
     if (slides.length > 0) {
       showSlide(0);
-      setInterval(nextSlide, 8000);
     }
 
     // Fade hero text on inactivity
@@ -227,6 +254,7 @@
       if (!faded) {
         heroText.classList.add('fade-out');
         faded = true;
+        startSlideshow();
       }
     }
 
@@ -240,11 +268,12 @@
     function resetFadeTimer() {
       clearTimeout(fadeTimeout);
       fadeInText();
+      stopSlideshow();
       fadeTimeout = setTimeout(fadeOutText, 10000);
     }
 
     document.addEventListener('mousemove', resetFadeTimer);
-    resetFadeTimer();
+    resetFadeTimer(); // Initial call
   </script>
 </body>
 </html>
