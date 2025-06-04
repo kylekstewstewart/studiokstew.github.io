@@ -56,7 +56,7 @@ body, html {
   color: black;
   font-size: 3.5rem;
   font-weight: 900;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   user-select: none;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
 }
@@ -77,6 +77,24 @@ body, html {
   opacity: 0;
 }
 
+/* Instagram icon wrapper */
+.instagram-wrapper {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Icon-only Instagram button */
+.instagram-icon img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.instagram-icon img:hover {
+  transform: scale(1.1);
+}
+
 /* Buttons container */
 .buttons {
   display: flex;
@@ -85,7 +103,6 @@ body, html {
   gap: 15px;
   z-index: 15;
   position: relative;
-  margin-top: 20px;
 }
 
 /* Regular buttons */
@@ -106,31 +123,6 @@ body, html {
 .button:hover {
   background-color: white;
   color: black;
-}
-
-/* Instagram button image */
-.instagram-button img {
-  width: 32px;
-  height: 32px;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.instagram-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  border: 2px solid white;
-  border-radius: 15px;
-  transition: background-color 0.3s, border-color 0.3s;
-  text-decoration: none;
-}
-
-.instagram-button:hover {
-  background-color: white;
-  border-color: white;
-  filter: invert(1);
 }
 
 /* Footer */
