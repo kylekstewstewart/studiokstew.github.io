@@ -89,24 +89,34 @@ header h1,
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
+  gap: 20px;
   max-width: 1200px;
   margin: 20px auto;
   padding: 0 15px;
+  overflow-y: auto;
 }
 
 /* Each image frame */
 .image-frame {
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 3px solid white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border: 6px solid white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 /* Gallery images */
 .image-frame img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 400px;
   height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: center;
   display: block;
   transition: transform 0.3s ease;
   cursor: pointer;
