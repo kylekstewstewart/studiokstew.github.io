@@ -11,27 +11,29 @@
     <div class="background-image"></div>
   </div>
 
+  <header class="site-header">Studio K-Stew</header>
+
   <div id="hero-container">
-    <h1>Studio K-Stew</h1>
     <div class="hero-text">
+      <h1>Welcome to Studio K-Stew</h1>
       <p>
         I’m Kyle Stewart, a passionate photographer specializing in travel and sports photography. I’ve climbed 14ers at dawn to capture breathtaking landscapes and captured windsurfing action during Hurricane Dorian featured in US Windsurfing magazine. Soon, I’ll be expanding into portrait photography.
       </p>
     </div>
-   <div class="instagram-wrapper">
-  <a href="https://www.instagram.com/studiokstew" target="_blank" class="instagram-icon" aria-label="Instagram">
-    <img src="Instagram_icon.png" alt="Instagram" />
-  </a>
-</div>
 
-<div class="buttons">
-  <a href="wildlife.html" class="button">Wildlife</a>
-  <a href="landscapes.html" class="button">Landscapes</a>
-  <a href="portraits.html" class="button">Portraits</a>
-  <a href="sports.html" class="button">Sports</a>
-  <a href="about.html" class="button">About Me</a>
-</div>
+    <div class="instagram-button">
+      <a href="https://www.instagram.com/studiokstew" target="_blank" aria-label="Instagram">
+        <img src="Instagram_icon.png" alt="Instagram" />
+      </a>
+    </div>
 
+    <div class="buttons">
+      <a href="wildlife.html" class="button">Wildlife</a>
+      <a href="landscapes.html" class="button">Landscapes</a>
+      <a href="portraits.html" class="button">Portraits</a>
+      <a href="sports.html" class="button">Sports</a>
+      <a href="about.html" class="button">About Me</a>
+    </div>
   </div>
 
   <footer>&copy; 2025 Studio K-Stew</footer>
@@ -47,7 +49,7 @@
       heroText.classList.remove('fade-out');
     }
 
-    // Example cycle: fade out after 15 seconds, fade back in after 20 seconds, repeat
+    // Fade out every 20s, fade in 5s later
     setInterval(() => {
       fadeOutText();
       setTimeout(fadeInText, 5000);
