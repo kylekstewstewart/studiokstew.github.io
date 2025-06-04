@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Studio K-Stew</title>
   <style>
-    /* Reset and base */
     * {
       box-sizing: border-box;
     }
-    body, html {
-      margin: 0; padding: 0; height: 100%;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: Arial, sans-serif;
-      overflow-y: auto;
       background: black;
-      color: #222;
+      color: white;
+      overflow: hidden;
     }
 
-    /* Background slideshow wrapper */
     .background-wrapper {
       position: fixed;
       top: 50%;
@@ -33,7 +33,6 @@
       z-index: -1;
     }
 
-    /* Each background image */
     .bg-slide {
       position: absolute;
       width: 100%;
@@ -49,7 +48,6 @@
       z-index: 1;
     }
 
-    /* Site header */
     .site-header {
       position: sticky;
       top: 0;
@@ -64,7 +62,6 @@
       user-select: none;
     }
 
-    /* Hero container */
     #hero-container {
       max-width: 900px;
       margin: 40px auto 60px;
@@ -76,7 +73,6 @@
       z-index: 10;
     }
 
-    /* Hero text */
     .hero-text {
       transition: opacity 1s ease;
       font-size: 1.1rem;
@@ -87,10 +83,10 @@
       opacity: 0;
     }
 
-    /* Instagram button */
     .instagram-button {
       margin: 20px 0;
     }
+
     .instagram-button a img {
       width: 40px;
       height: 40px;
@@ -98,11 +94,11 @@
       filter: drop-shadow(0 0 1px rgba(0,0,0,0.4));
       transition: transform 0.3s ease;
     }
+
     .instagram-button a img:hover {
       transform: scale(1.1);
     }
 
-    /* Navigation buttons */
     .buttons {
       display: flex;
       justify-content: center;
@@ -121,6 +117,7 @@
       user-select: none;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     .button:hover,
     .button:focus {
       background-color: white;
@@ -128,30 +125,20 @@
       outline: none;
     }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 15px 0;
       color: #888;
       user-select: none;
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Background wrapper -->
-  <div class="background-wrapper" aria-hidden="true">
-    <div class="bg-slide" style="background-image: url('bg1.jpg');"></div>
-    <div class="bg-slide" style="background-image: url('bg2.jpg');"></div>
-    <div class="bg-slide" style="background-image: url('bg3.jpg');"></div>
-    <div class="bg-slide" style="background-image: url('bg4.jpg');"></div>
-  </div>
+  <div class="background-wrapper" id="background-wrapper" aria-hidden="true"></div>
 
-  <!-- Header -->
   <div class="site-header">Studio K-Stew</div>
 
-  <!-- Hero container -->
   <div id="hero-container">
     <div class="hero-text">
       <h1>Welcome to Studio K-Stew</h1>
@@ -163,14 +150,12 @@
       </p>
     </div>
 
-    <!-- Instagram -->
     <div class="instagram-button">
       <a href="https://www.instagram.com/studiokstew" target="_blank" aria-label="Instagram">
         <img src="Instagram_icon.png" alt="Instagram" />
       </a>
     </div>
 
-    <!-- Navigation buttons -->
     <div class="buttons">
       <a href="wildlife.html" class="button">Wildlife</a>
       <a href="landscapes.html" class="button">Landscapes</a>
@@ -180,31 +165,45 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>&copy; 2025 Studio K-Stew</footer>
 
-  <!-- Scripts -->
   <script>
-    // Background slideshow logic
-    const slides = document.querySelectorAll('.bg-slide');
+    // Background slideshow from manifest.json
+    const wrapper = document.getElementById('background-wrapper');
+    let slideElements = [];
     let currentSlide = 0;
-    const slideCount = slides.length;
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('visible', i === index);
-      });
+    async function loadBackgroundImages() {
+      try {
+        const res = await fetch('/portfolio/manifest.json');
+        const files = await res.json();
+        const imageFiles = files.filter(file => /\.(jpe?g|png|webp)$/i.test(file));
+
+        imageFiles.forEach((filename, index) => {
+          const div = document.createElement('div');
+          div.className = 'bg-slide';
+          div.style.backgroundImage = `url('/portfolio/${filename}')`;
+          if (index === 0) div.classList.add('visible');
+          wrapper.appendChild(div);
+        });
+
+        slideElements = document.querySelectorAll('.bg-slide');
+        setInterval(cycleSlides, 8000);
+      } catch (e) {
+        console.error("Error loading manifest.json:", e);
+      }
     }
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slideCount;
-      showSlide(currentSlide);
+    function cycleSlides() {
+      if (slideElements.length === 0) return;
+      slideElements[currentSlide].classList.remove('visible');
+      currentSlide = (currentSlide + 1) % slideElements.length;
+      slideElements[currentSlide].classList.add('visible');
     }
 
-    showSlide(currentSlide);
-    setInterval(nextSlide, 8000);
+    loadBackgroundImages();
 
-    // Hero text fade logic
+    // Hero fade on inactivity
     const heroText = document.querySelector('.hero-text');
     let fadeTimeout;
     let faded = false;
@@ -230,7 +229,6 @@
     }
 
     document.addEventListener('mousemove', resetFadeTimer);
-
     resetFadeTimer();
   </script>
 </body>
