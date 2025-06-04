@@ -28,16 +28,22 @@ body, html {
   z-index: -2;
   pointer-events: none;
 }
-
-/* Background image inside the wrapper */
-.background-image {
+/* Slideshow image styling */
+.bg-slide {
+  position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url('your-background.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  background-color: black;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  z-index: -2;
+}
+
+/* Make current slide visible */
+.bg-slide.visible {
+  opacity: 1;
+  z-index: -1;
 }
 
 /* Site header */
