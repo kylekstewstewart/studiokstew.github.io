@@ -11,22 +11,28 @@
     <div class="background-image"></div>
   </div>
 
-  <header class="site-header">Studio K-Stew</header>
+  <!-- Header -->
+  <div class="site-header">Studio K-Stew</div>
 
+  <!-- Hero content -->
   <div id="hero-container">
     <div class="hero-text">
       <h1>Welcome to Studio K-Stew</h1>
       <p>
-        I’m Kyle Stewart, a passionate photographer specializing in travel and sports photography. I’ve climbed 14ers at dawn to capture breathtaking landscapes and captured windsurfing action during Hurricane Dorian featured in US Windsurfing magazine. Soon, I’ll be expanding into portrait photography.
+        I’m Kyle Stewart, a passionate photographer specializing in travel and sports photography.
+        I’ve climbed 14ers at dawn to capture breathtaking landscapes and captured windsurfing action
+        during Hurricane Dorian featured in US Windsurfing magazine. Soon, I’ll be expanding into portrait photography.
       </p>
     </div>
 
+    <!-- Instagram button -->
     <div class="instagram-button">
       <a href="https://www.instagram.com/studiokstew" target="_blank" aria-label="Instagram">
         <img src="Instagram_icon.png" alt="Instagram" />
       </a>
     </div>
 
+    <!-- Navigation buttons -->
     <div class="buttons">
       <a href="wildlife.html" class="button">Wildlife</a>
       <a href="landscapes.html" class="button">Landscapes</a>
@@ -36,24 +42,36 @@
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>&copy; 2025 Studio K-Stew</footer>
 
+  <!-- Fade logic -->
   <script>
     const heroText = document.querySelector('.hero-text');
+    let hasFaded = false;
 
     function fadeOutText() {
-      heroText.classList.add('fade-out');
+      if (!hasFaded) {
+        heroText.classList.add('fade-out');
+        hasFaded = true;
+      }
     }
 
     function fadeInText() {
       heroText.classList.remove('fade-out');
+      hasFaded = false;
     }
 
-    // Fade out every 20s, fade in 5s later
-    setInterval(() => {
-      fadeOutText();
-      setTimeout(fadeInText, 5000);
-    }, 20000);
+    // Auto fade after 10s of no mouse movement
+    let fadeTimeout = setTimeout(fadeOutText, 10000);
+
+    document.addEventListener('mousemove', () => {
+      clearTimeout(fadeTimeout);
+      if (hasFaded) {
+        fadeInText();
+      }
+      fadeTimeout = setTimeout(fadeOutText, 10000);
+    });
   </script>
 </body>
 </html>
