@@ -1,148 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Studio K-Stew</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Studio K-Stew</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<div class="background-wrapper">
+  <div class="background-image"></div>
+</div>
 
-    <!-- Background slideshow wrapper (empty, filled by JS) -->
-    <div class="background-wrapper" id="background-wrapper" aria-hidden="true"></div>
-
-    <!-- Header -->
-    <div class="site-header">Studio K-Stew</div>
-
-    <!-- Hero -->
-    <div id="hero-container">
-        <div class="hero-text">
-            <h1>Welcome to Studio K-Stew</h1>
-            <p>
-                I'm Kyle 'K-Stew' Stewart — a New England-based photographer drawn to bold landscapes, remote places, and stunning wildlife.<br><br>
-                I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges,<br>
-                and my action work documenting windsurfers during Hurricane Dorian was featured in <em>Windsurfing Now</em> magazine.<br><br>
-                My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
-            </p>
-        </div>
-
-        <!-- Instagram -->
-        <div class="instagram-button">
-            <a href="[invalid url, do not cite] target="_blank" aria-label="Instagram">
-                <img src="Instagram_icon.png" alt="Instagram" />
-            </a>
-        </div>
-
-        <!-- Navigation -->
-        <div class="buttons">
-            <a href="wildlife.html" class="button">Wildlife</a>
-            <a href="landscapes.html" class="button">Landscapes</a>
-            <a href="portraits.html" class="button">Portraits</a>
-            <a href="sports.html" class="button">Sports</a>
-            <a href="about.html" class="button">About Me</a>
-        </div>
+  
+  <div id="content">
+    <h1>Studio K-Stew</h1>
+    <p>Portfolio coming soon.</p>
+    <a href="https://www.instagram.com/studiokstew" target="_blank">
+      <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+    </a>
+    <div class="buttons">
+      <a class="button" href="wildlife.html">Wildlife</a>
+      <a class="button" href="landscapes.html">Landscapes</a>
+      <a class="button" href="portraits.html">Portraits</a>
+      <a class="button" href="sports.html">Sports</a>
+      <a class="button" href="about.html">About Me</a>
     </div>
+  </div>
+  <footer>&copy; 2025 Studio K-Stew</footer>
+  <script>
+    let timer;
+    let slideshowActive = false;
+    let intervalId = null;
+    const content = document.getElementById("content");
+    const bg = document.querySelector(".background-image");
+    let images = [];
 
-    <!-- Footer -->
-    <footer>© 2025 Studio K-Stew</footer>
-
-    <!-- Scripts -->
-<script>
-    const wrapper = document.getElementById('background-wrapper');
-    let slides = [];
-    let currentSlide = 0;
-    let isSlideshowActive = false;
-    let slideshowInterval = null;
-    let portfolioIndex = 0;
-
-    const slidePaths = [
-        "/kstewlandingpage.jpeg",  // Absolute path to ensure root access
-        "/portfolio/kstew1.jpg",
-        "/portfolio/kstew2.jpg",
-        "/portfolio/kstew3.jpg",
-        "/portfolio/kstew4.jpg",
-        "/portfolio/kstew5.jpg",
-        "/portfolio/kstew6.jpg",
-        "/portfolio/kstew7.jpg",
-        "/portfolio/kstew8.jpg",
-        "/portfolio/kstew9.jpg",
-        "/portfolio/kstew10.jpg"
-    ];
-
-    const numPortfolioSlides = slidePaths.length - 1;
-
-    slidePaths.forEach(path => {
-        const slide = document.createElement('div');
-        slide.className = 'bg-slide';
-        slide.style.backgroundImage = `url('${path}')`;
-        slide.onerror = () => console.error(`Failed to load image: ${path}`);
-        wrapper.appendChild(slide);
-        slides.push(slide);
-    });
-
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('visible', i === index);
-        });
-    }
-
-    function nextSlide() {
-        portfolioIndex = (portfolioIndex + 1) % numPortfolioSlides;
-        currentSlide = 1 + portfolioIndex;
-        showSlide(currentSlide);
+    function setInitialBackground() {
+      bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
     }
 
     function startSlideshow() {
-        if (!isSlideshowActive) {
-            isSlideshowActive = true;
-            portfolioIndex = 0;
-            currentSlide = 1 + portfolioIndex;
-            showSlide(currentSlide);
-            slideshowInterval = setInterval(nextSlide, 8000);
-        }
+      if (slideshowActive || images.length === 0) return;
+      slideshowActive = true;
+      intervalId = setInterval(() => {
+        const image = images[Math.floor(Math.random() * images.length)];
+        const preloader = new Image();
+        bg.style.backgroundImage = `url('portfolio/${image}')`;
+      }, 10000);
     }
 
     function stopSlideshow() {
-        if (isSlideshowActive) {
-            isSlideshowActive = false;
-            clearInterval(slideshowInterval);
-            slideshowInterval = null;
-            showSlide(0);
-        }
+      slideshowActive = false;
+      clearInterval(intervalId);
+      setInitialBackground();
     }
 
-    if (slides.length > 0) {
-        showSlide(0);
+    function resetTimer() {
+      content.classList.remove("fade-out");
+      content.classList.add("fade-in");
+      stopSlideshow();
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        content.classList.remove("fade-in");
+        content.classList.add("fade-out");
+        startSlideshow();
+      }, 20000);
     }
 
-    const heroText = document.querySelector('.hero-text');
-    let fadeTimeout;
-    let faded = false;
-
-    function fadeOutText() {
-        if (!faded) {
-            heroText.classList.add('fade-out');
-            faded = true;
-            startSlideshow();
-        }
+    async function loadManifest() {
+      try {
+        const response = await fetch('portfolio/manifest.json');
+        const data = await response.json();
+        images = data;
+      } catch (e) {
+        console.error("Failed to load manifest.json", e);
+      }
     }
 
-    function fadeInText() {
-        if (faded) {
-            heroText.classList.remove('fade-out');
-            faded = false;
-        }
-    }
-
-    function resetFadeTimer() {
-        clearTimeout(fadeTimeout);
-        fadeInText();
-        stopSlideshow();
-        fadeTimeout = setTimeout(fadeOutText, 10000);
-    }
-
-    document.addEventListener('mousemove', resetFadeTimer);
-    resetFadeTimer();
-</script>
+    document.addEventListener("mousemove", resetTimer);
+    setInitialBackground();
+    loadManifest().then(resetTimer);
+  </script>
 </body>
 </html>
