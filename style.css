@@ -1,158 +1,146 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: black;
-    color: #222;
-    overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: #fff;
+  overflow-y: auto;
 }
 
+/* Background image setup */
 .background-wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90vw;
-    height: 90vh;
-    border: 10px solid white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(255,255,255,0.15);
-    z-index: -2;
-    pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 90vh;
+  border: 10px solid white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(255,255,255,0.15);
+  z-index: -2;
+  pointer-events: none;
 }
 
-.bg-slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-    z-index: -2;
+.background-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1.5s ease-in-out;
 }
 
-.bg-slide.visible {
-    opacity: 1;
-    z-index: -1;
-}
-
-.site-header {
-    position: sticky;
-    top: 0;
-    background-color: rgba(255,255,255,0.95);
-    backdrop-filter: blur(6px);
-    padding: 12px 25px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 2rem;
-    color: #222;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    z-index: 20;
-}
-
+/* Hero Text */
 #hero-container {
-    max-width: 900px;
-    margin: 40px auto 80px auto;
-    padding: 0 20px;
-    text-align: center;
-    position: relative;
-    color: white;
-    z-index: 10;
+  max-width: 900px;
+  margin: 40px auto 80px auto;
+  padding: 0 20px;
+  text-align: center;
+  position: relative;
+  color: white;
+  z-index: 10;
 }
 
 .hero-text h1 {
-    font-size: 2.4rem;
-    margin-bottom: 15px;
-    color: white;
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+  color: white;
 }
 
 .hero-text p {
-    font-size: 1.15rem;
-    line-height: 1.5;
-    max-width: 650px;
-    margin: 0 auto;
-    color: white;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  max-width: 650px;
+  margin: 0 auto;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
 }
 
 .fade-out {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
 }
 
+/* Instagram Button */
 .instagram-button {
-    margin: 25px auto 40px;
-    width: 48px;
-    height: 48px;
+  margin: 25px auto 40px;
+  width: 48px;
+  height: 48px;
 }
 
 .instagram-button a {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .instagram-button img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
 .instagram-button img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
+/* Navigation Buttons */
 .buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
 .button {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    user-select: none;
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
 }
 
 .button:hover,
 .button:focus {
-    background-color: white;
-    color: #333;
-    outline: none;
-    cursor: pointer;
+  background-color: white;
+  color: #333;
+  outline: none;
+  cursor: pointer;
 }
 
+/* Footer */
 footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 20px;
 }
 
+/* Scrollbar styling */
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.3);
-    border-radius: 10px;
-}
-
-/* Ensure hero text fades smoothly */
-.hero-text {
-    transition: opacity 1.5s ease-in-out;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
 }
