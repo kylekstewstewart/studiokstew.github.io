@@ -10,10 +10,10 @@ body, html {
   font-family: Arial, sans-serif;
   background-color: black;
   color: white;
-  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Background frame */
+/* Background container */
 .background-wrapper {
   position: fixed;
   top: 50%;
@@ -29,77 +29,76 @@ body, html {
   pointer-events: none;
 }
 
+/* Background image */
 .background-image {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   transition: background-image 1s ease-in-out;
+  z-index: -1;
 }
 
-/* Hero Text */
-.hero-overlay-text {
+/* Hero Text Overlay */
+#hero-text {
   position: relative;
   max-width: 900px;
-  margin: 40px auto 20px;
+  margin: 40px auto 20px auto;
   text-align: center;
   padding: 0 20px;
+  color: white;
   z-index: 10;
 }
 
-.hero-overlay-text h1 {
+#hero-text h1 {
   font-size: 2.4rem;
   margin-bottom: 15px;
 }
 
-.hero-overlay-text p {
+#hero-text p {
   font-size: 1.15rem;
-  line-height: 1.6;
+  line-height: 1.5;
   max-width: 650px;
   margin: 0 auto;
 }
 
-/* Fade animation */
-.fade-in {
-  opacity: 1;
-  transition: opacity 1s ease-in;
-}
-
-.fade-out {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease-out;
-}
-
-/* Buttons + Instagram */
-.main-controls {
-  text-align: center;
-  margin-top: 30px;
-}
-
+/* Instagram Button */
 .instagram-button {
-  margin-bottom: 20px;
+  margin: 25px auto 40px;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+}
+
+.instagram-button a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .instagram-button img {
-  width: 48px;
-  height: 48px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  display: inline-block;
+  display: block;
   transition: transform 0.3s ease;
 }
 
 .instagram-button img:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
+/* Navigation Buttons */
 .buttons {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-top: 10px;
+  margin-bottom: 40px;
 }
 
 .button {
@@ -111,11 +110,38 @@ body, html {
   font-size: 16px;
   font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   background-color: white;
   color: #333;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Fade In/Out */
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+  pointer-events: auto;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  pointer-events: none;
+}
+
+/* Main Content */
+#content {
+  max-width: 900px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  color: white;
 }
 
 /* Footer */
@@ -123,16 +149,5 @@ footer {
   text-align: center;
   font-size: 0.9rem;
   color: #888;
-  margin-top: 40px;
-  padding-bottom: 20px;
-}
-
-/* Scrollbar (optional) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  margin-bottom: 20px;
 }
