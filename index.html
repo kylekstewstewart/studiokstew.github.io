@@ -7,14 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="background-wrapper">
-  <div class="background-image"></div>
-</div>
+  <div class="background-wrapper">
+    <div class="background-image"></div>
+  </div>
 
-  
+  <!-- Hero Intro Overlay -->
+  <div class="hero-overlay-text">
+    <h1>Welcome to Studio K-Stew</h1>
+    <p>
+      I'm Kyle "K-Stew" Stewart — a New England-based photographer drawn to bold landscapes, remote places, and powerful motion. 
+      I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, 
+      and my action work documenting windsurfers during Hurricane Dorian has been featured in <em>US Windsurfing Magazine</em>. 
+      My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
+    </p>
+    <a href="wildlife.html" class="cta-button">Explore My Portfolio</a>
+  </div>
+
   <div id="content">
     <h1>Studio K-Stew</h1>
-    <p>Portfolio coming soon.</p>
     <a href="https://www.instagram.com/studiokstew" target="_blank">
       <img src="Instagram_icon.png" alt="Instagram" class="icon" />
     </a>
@@ -26,7 +36,9 @@
       <a class="button" href="about.html">About Me</a>
     </div>
   </div>
-  <footer>&copy; 2025 Studio K-Stew</footer>
+
+  <footer>&copy; 2025 Kyle Stewart | Studio K-Stew. All rights reserved.</footer>
+
   <script>
     let timer;
     let slideshowActive = false;
@@ -44,7 +56,6 @@
       slideshowActive = true;
       intervalId = setInterval(() => {
         const image = images[Math.floor(Math.random() * images.length)];
-        const preloader = new Image();
         bg.style.backgroundImage = `url('portfolio/${image}')`;
       }, 10000);
     }
