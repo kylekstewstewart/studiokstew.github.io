@@ -28,8 +28,6 @@ body, html {
   z-index: -2;
   pointer-events: none;
 }
-
-/* Background image */
 .background-image {
   position: absolute;
   top: 0; left: 0;
@@ -38,9 +36,11 @@ body, html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-image: url('kstewlandingpage.jpeg'); /* <-- important to have this here */
   transition: background-image 1s ease-in-out;
   z-index: -1;
 }
+
 
 /* Hero Text Overlay */
 #hero-text {
