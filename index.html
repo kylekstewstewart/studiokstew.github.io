@@ -8,13 +8,13 @@
 </head>
 <body>
 
-  <!-- Background wrapper holds the visible background image -->
+  <!-- Background wrapper -->
   <div class="background-wrapper">
     <div class="background-image"></div>
   </div>
 
-  <!-- Hero Intro Text overlay -->
-  <div class="hero-overlay-text fade-in" id="hero-text">
+  <!-- Hero Intro Text -->
+  <div class="hero-overlay-text fade-in" id="heroText">
     <h1>Welcome to Studio K-Stew</h1>
     <p>
       I'm Kyle "K-Stew" Stewart — a New England-based photographer drawn to bold landscapes, remote places, and powerful motion. 
@@ -24,18 +24,18 @@
     </p>
   </div>
 
-  <!-- Main content with navigation buttons and Instagram -->
+  <!-- Navigation and Instagram -->
   <div id="content">
     <h1>Studio K-Stew</h1>
 
-    <!-- Instagram icon link -->
+    <!-- Instagram icon -->
     <div class="instagram-button">
       <a href="https://www.instagram.com/studiokstew" target="_blank">
-        <img src="Instagram_icon.png" alt="Instagram" />
+        <img src="instagram-icon.png" alt="Instagram" />
       </a>
     </div>
 
-    <!-- Navigation buttons -->
+    <!-- Navigation -->
     <div class="buttons">
       <a class="button" href="wildlife.html">Wildlife</a>
       <a class="button" href="landscapes.html">Landscapes</a>
@@ -45,16 +45,15 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>&copy; 2025 Kyle Stewart | Studio K-Stew. All rights reserved.</footer>
 
-  <!-- Background slideshow script -->
+  <!-- Script -->
   <script>
     let timer;
     let slideshowActive = false;
     let intervalId = null;
     const bg = document.querySelector(".background-image");
-    const heroText = document.getElementById("hero-text");
+    const hero = document.getElementById("heroText");
     let images = [];
 
     function setInitialBackground() {
@@ -77,13 +76,13 @@
     }
 
     function resetTimer() {
-      heroText.classList.remove("fade-out");
-      heroText.classList.add("fade-in");
+      hero.classList.remove("fade-out");
+      hero.classList.add("fade-in");
       stopSlideshow();
       clearTimeout(timer);
       timer = setTimeout(() => {
-        heroText.classList.remove("fade-in");
-        heroText.classList.add("fade-out");
+        hero.classList.remove("fade-in");
+        hero.classList.add("fade-out");
         startSlideshow();
       }, 20000);
     }
