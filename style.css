@@ -1,19 +1,18 @@
-/* Reset and base */
 * {
   box-sizing: border-box;
 }
 
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background: black;
   font-family: Arial, sans-serif;
-  background-color: black;
   color: white;
   overflow-y: auto;
 }
 
-/* Background container */
+/* Frame for background image */
 .background-wrapper {
   position: fixed;
   top: 50%;
@@ -24,53 +23,71 @@ body, html {
   border: 10px solid white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 30px rgba(255,255,255,0.15);
   z-index: -2;
   pointer-events: none;
 }
+
+/* Image itself */
 .background-image {
   position: absolute;
   top: 0; left: 0;
   width: 100%;
   height: 100%;
+  background-image: url('kstewlandingpage.jpeg'); /* fallback */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url('kstewlandingpage.jpeg'); /* <-- important to have this here */
   transition: background-image 1s ease-in-out;
   z-index: -1;
 }
 
-
-/* Hero Text Overlay */
-#hero-text {
+/* Overlay text */
+.hero-overlay-text {
   position: relative;
-  max-width: 900px;
-  margin: 40px auto 20px auto;
   text-align: center;
-  padding: 0 20px;
+  max-width: 900px;
+  margin: 40px auto;
   color: white;
   z-index: 10;
+  padding: 0 20px;
 }
 
-#hero-text h1 {
+.hero-overlay-text h1 {
   font-size: 2.4rem;
   margin-bottom: 15px;
 }
 
-#hero-text p {
+.hero-overlay-text p {
   font-size: 1.15rem;
   line-height: 1.5;
   max-width: 650px;
   margin: 0 auto;
 }
 
-/* Instagram Button */
+/* Fade control (text only) */
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease-out;
+}
+
+/* Navigation + Instagram */
+#content {
+  text-align: center;
+  z-index: 5;
+  position: relative;
+}
+
 .instagram-button {
   margin: 25px auto 40px;
   width: 48px;
   height: 48px;
-  text-align: center;
 }
 
 .instagram-button a {
@@ -89,7 +106,6 @@ body, html {
 
 .instagram-button img:hover {
   transform: scale(1.1);
-  cursor: pointer;
 }
 
 /* Navigation Buttons */
@@ -98,7 +114,6 @@ body, html {
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 40px;
 }
 
 .button {
@@ -121,33 +136,20 @@ body, html {
   cursor: pointer;
 }
 
-/* Fade In/Out */
-.fade-in {
-  opacity: 1;
-  transition: opacity 1s ease-in;
-  pointer-events: auto;
-}
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 1s ease-out;
-  pointer-events: none;
-}
-
-/* Main Content */
-#content {
-  max-width: 900px;
-  margin: 0 auto 30px auto;
-  text-align: center;
-  z-index: 10;
-  position: relative;
-  color: white;
-}
-
 /* Footer */
 footer {
   text-align: center;
   font-size: 0.9rem;
   color: #888;
   margin-bottom: 20px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
 }
