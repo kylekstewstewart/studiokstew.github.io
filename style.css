@@ -1,170 +1,77 @@
-/* Reset and base styles */
+/* Reset */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
+html, body {
   height: 100%;
   font-family: Arial, sans-serif;
-  background-color: black;
   color: white;
-  overflow: hidden;
+  background-color: black;
 }
 
-/* Background wrapper and image */
-.background-wrapper {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  height: 90vh;
-  border: 10px solid white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 30px rgba(255,255,255,0.15);
-  z-index: -2;
-}
-
+/* Background */
 .background-image {
-  position: absolute;
+  background-image: url('kstewlandingpage.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   z-index: -1;
-  transition: background-image 1s ease-in-out;
 }
 
-
-/* Hero text styling */
-.hero-overlay-text {
+/* Foreground content */
+.content {
   position: relative;
+  z-index: 1;
+  padding: 4rem 2rem;
   text-align: center;
-  max-width: 900px;
-  margin: 40px auto 20px;
-  z-index: 1;
-  padding: 0 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 5rem;
 }
 
-.hero-overlay-text h1 {
-  font-size: 2.4rem;
-  margin-bottom: 15px;
-}
-
-.hero-overlay-text p {
-  font-size: 1.15rem;
-  line-height: 1.6;
-  max-width: 650px;
-  margin: 0 auto;
-}
-
-/* Instagram button */
-.instagram-button {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0 30px;
-  z-index: 1;
-}
-
-.instagram-button img {
-  width: 48px;
-  height: 48px;
-  transition: transform 0.3s ease;
-}
-
-.instagram-button img:hover {
-  transform: scale(1.1);
-}
-
-/* Navigation buttons */
+/* Buttons */
 .buttons {
   display: flex;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
-  gap: 16px;
-  z-index: 1;
-  padding-bottom: 20px;
 }
 
-.button {
-  background-color: #333;
+.buttons a {
+  background: #333;
   color: white;
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.button:hover {
-  background-color: white;
-  color: #333;
+.buttons a:hover {
+  background: #555;
 }
 
-/* Fading transitions */
-.fade-in {
-  opacity: 1;
-  transition: opacity 1s ease-in;
-}
-
-.fade-out {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease-out;
+/* Instagram */
+.instagram-icon {
+  width: 40px;
+  height: 40px;
+  margin: 1rem auto;
+  display: block;
 }
 
 /* Footer */
 footer {
-  text-align: center;
+  margin-top: 2rem;
   font-size: 0.9rem;
-  color: #888;
-  z-index: 1;
-}
-
-/* Scrollbar tweaks */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
-.background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.3;
-  z-index: -1;
-}
-.background-image {
-  /* ... previous styles ... */
-  animation: fadeIn 2s ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 0.3; }
-}
-.background-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-  opacity: 0.5;
+  color: #ccc;
 }
