@@ -2,101 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Studio K-Stew</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="background-image"></div>
 
-  <!-- Background wrapper -->
-  <div class="background-wrapper">
-    <div class="background-image"></div>
-  </div>
-
-  <!-- Hero Text -->
-  <div class="hero-overlay-text">
+  <div class="content">
     <h1>Welcome to Studio K-Stew</h1>
     <p>
-      I'm Kyle "K-Stew" Stewart — a New England-based photographer drawn to bold landscapes, remote places, and powerful motion. 
-      I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, 
-      and my action work documenting windsurfers during Hurricane Dorian has been featured in 
-      <em>Windsurfing NOW</em> magazine. My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
+      I'm Kyle "K-Stew" Stewart — a New England-based photographer drawn to bold landscapes, remote places, and powerful motion. I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, and my action work documenting windsurfers during Hurricane Dorian has been featured in <em>Windsurfing NOW</em> magazine. My passion lies in travel and sports photography, but I’m also expanding into portrait work — always with an eye for authentic storytelling and wild beauty.
     </p>
-  </div>
 
-  <!-- Instagram Icon -->
-  <div class="instagram-button">
-    <a href="https://www.instagram.com/studiokstew" target="_blank">
-      <img src="Instagram_icon.png" alt="Instagram" />
+    <a href="https://www.instagram.com/KStew_Studio/" target="_blank">
+      <img src="Instagram_icon.png" alt="Instagram" class="instagram-icon" />
     </a>
+
+    <div class="buttons">
+      <a href="wildlife.html">Wildlife</a>
+      <a href="landscapes.html">Landscapes</a>
+      <a href="portraits.html">Portraits</a>
+      <a href="sports.html">Sports</a>
+      <a href="about.html">About Me</a>
+    </div>
+
+    <footer>
+      © 2025 Kyle Stewart | Studio K-Stew. All rights reserved.
+    </footer>
   </div>
-
-  <!-- Navigation -->
-  <div class="buttons">
-    <a class="button" href="wildlife.html">Wildlife</a>
-    <a class="button" href="landscapes.html">Landscapes</a>
-    <a class="button" href="portraits.html">Portraits</a>
-    <a class="button" href="sports.html">Sports</a>
-    <a class="button" href="about.html">About Me</a>
-  </div>
-
-  <!-- Footer -->
-  <footer>&copy; 2025 Kyle Stewart | Studio K-Stew. All rights reserved.</footer>
-
-  <!-- Slideshow Script -->
-  <script>
-    const bg = document.querySelector(".background-image");
-    const contentBlocks = document.querySelectorAll(".hero-overlay-text, .buttons, .instagram-button");
-    let timer, slideshowActive = false, intervalId, images = [];
-
-    function setInitialBackground() {
-      bg.style.backgroundImage = "url('kstewlandingpage.jpeg')";
-    }
-
-    function startSlideshow() {
-      if (slideshowActive || images.length === 0) return;
-      slideshowActive = true;
-      intervalId = setInterval(() => {
-        const image = images[Math.floor(Math.random() * images.length)];
-        bg.style.backgroundImage = `url('portfolio/${image}')`;
-      }, 10000);
-    }
-
-    function stopSlideshow() {
-      slideshowActive = false;
-      clearInterval(intervalId);
-      setInitialBackground();
-    }
-
-    function resetTimer() {
-      contentBlocks.forEach(el => {
-        el.classList.remove("fade-out");
-        el.classList.add("fade-in");
-      });
-      stopSlideshow();
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        contentBlocks.forEach(el => {
-          el.classList.remove("fade-in");
-          el.classList.add("fade-out");
-        });
-        startSlideshow();
-      }, 20000);
-    }
-
-    async function loadManifest() {
-      try {
-        const response = await fetch("portfolio/manifest.json");
-        const data = await response.json();
-        images = data;
-      } catch (e) {
-        console.error("Could not load manifest.json", e);
-      }
-    }
-
-    document.addEventListener("mousemove", resetTimer);
-    setInitialBackground();
-    loadManifest().then(resetTimer);
-  </script>
 </body>
 </html>
