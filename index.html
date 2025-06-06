@@ -68,39 +68,42 @@
   <div class="content-box">
     <h1>Studio K-Stew</h1>
     <p>
-      They call me K-Stew, a New England-based wildlife and travel photographer drawn to remote places and diverse cultures.<br>
-      I am a PADI certified rescue SCUBA diver and passionate reef conservationist.<br>
-      I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, and hiked through snowstorms in the high desert during the winter solstice.<br>
-      My action work documenting windsurfers during Hurricane Dorian has been featured in <em>Windsurfing NOW</em> magazine.<br><br>
+       They call me K-Stew, a new england based wildlife and travel photographer drawn to remote places and diverse cultures. 
+      I am a PADI certified rescue SCUBA diver, and passionate reef conservationist. 
+      I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, and hiked through snowstorms 
+      in the high desert during the winter solstice. 
+      My action work documenting windsurfers during Hurricane Dorian has been featured in <em>Windsurfing NOW</em> magazine.<br>
+      <br>
+      
 
-      I have recently returned from a 20-day safari in Tanzania, Africa.<br><br><br>
+      I have recently returned from a 20 day safari in Tanzania Africa.<br>
+      <br>
+      <br>
+      Albums and fine prints coming soon!<br>
+      <br>
 
-      Albums and fine prints coming soon!<br><br>
-
-      Follow me on Instagram!
-    </p>
+      Follow me on instagram!
   </div>
 
-  <!-- Slideshow Script (loads from portfolio/manifest.json) -->
+  <!-- Slideshow Script -->
   <script>
-    fetch('portfolio/manifest.json')
-      .then(response => response.json())
-      .then(files => {
-        const images = files.map(name => `portfolio/${name}`);
-        let current = 0;
-        const slideshow = document.getElementById('slideshow');
+    const images = [
+      'kstew1.jpg',
+      'kstew2.jpg',
+      'kstew3.jpg',
+      'kstew4.jpg'
+    ];
 
-        function changeBackground() {
-          slideshow.style.backgroundImage = `url('${images[current]}')`;
-          current = (current + 1) % images.length;
-        }
+    let current = 0;
+    const slideshow = document.getElementById('slideshow');
 
-        changeBackground();
-        setInterval(changeBackground, 5000);
-      })
-      .catch(err => {
-        console.error('Error loading manifest.json:', err);
-      });
+    function changeBackground() {
+      slideshow.style.backgroundImage = `url('${images[current]}')`;
+      current = (current + 1) % images.length;
+    }
+
+    changeBackground();
+    setInterval(changeBackground, 5000);
   </script>
 
 </body>
