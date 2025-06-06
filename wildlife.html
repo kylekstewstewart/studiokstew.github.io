@@ -5,57 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wildlife | Studio K-Stew</title>
   <style>
-    /* Reset and base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #111;
       color: #eee;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* Background */
-    .background-wrapper {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    .background-image {
-      background: url('your-background.jpg') no-repeat center center / cover;
-      width: 100%;
-      height: 100%;
-      opacity: 0.08;
-    }
-
-    /* Header */
     header {
       position: sticky;
       top: 0;
       z-index: 20;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(6px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 12px 24px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
     }
 
     .page-title {
       font-size: 1.8rem;
       font-weight: 700;
       color: #fff;
-      user-select: none;
     }
 
     .header-icons {
@@ -65,81 +42,64 @@
     }
 
     .button {
-      background-color: transparent;
+      background: transparent;
       border: 2px solid #eee;
       color: #eee;
       padding: 6px 16px;
-      text-decoration: none;
       border-radius: 6px;
+      text-decoration: none;
       font-size: 14px;
       font-weight: 600;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      user-select: none;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    .button:hover,
-    .button:focus {
+    .button:hover {
       background-color: #eee;
       color: #111;
-      outline: none;
       cursor: pointer;
     }
 
     .icon {
       width: 28px;
       height: 28px;
-      filter: drop-shadow(0 0 1px rgba(0,0,0,0.8));
+      filter: drop-shadow(0 0 1px black);
       transition: transform 0.3s ease;
     }
 
-    .icon:hover,
-    .icon:focus {
+    .icon:hover {
       transform: scale(1.1);
-      outline: none;
-      cursor: pointer;
     }
 
-    /* Gallery grid */
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       max-width: 1200px;
-      margin: 48px auto 80px;
+      margin: 48px auto;
       padding: 0 20px;
       flex-grow: 1;
-      user-select: none;
     }
 
     .image-frame {
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
       background-color: #222;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .image-frame:hover,
-    .image-frame:focus-within {
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
-      cursor: pointer;
     }
 
     .image-frame img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.3s ease;
       border-radius: 10px;
+      transition: transform 0.3s ease;
     }
 
-    .image-frame img:hover,
-    .image-frame img:focus {
+    .image-frame img:hover {
       transform: scale(1.05);
-      outline: none;
+      cursor: pointer;
     }
 
-    /* Lightbox */
     .lightbox-overlay {
       position: fixed;
       inset: 0;
@@ -148,7 +108,6 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      user-select: none;
     }
 
     .lightbox-overlay.show {
@@ -162,8 +121,7 @@
       box-shadow: 0 0 30px white;
     }
 
-    .lightbox-prev,
-    .lightbox-next {
+    .lightbox-prev, .lightbox-next {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
@@ -173,201 +131,110 @@
       font-size: 3rem;
       cursor: pointer;
       padding: 10px 20px;
-      user-select: none;
-      transition: color 0.3s ease;
     }
 
-    .lightbox-prev:hover,
-    .lightbox-next:hover,
-    .lightbox-prev:focus,
-    .lightbox-next:focus {
-      color: #fff;
-      outline: none;
-    }
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
 
-    .lightbox-prev {
-      left: 10px;
-    }
-
-    .lightbox-next {
-      right: 10px;
-    }
-
-    /* Footer */
     footer {
       text-align: center;
       color: gray;
       font-size: 14px;
       padding: 14px 0;
-      user-select: none;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 480px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 16px 20px;
-      }
-
-      .page-title {
-        font-size: 1.5rem;
-      }
-
-      .header-icons {
-        gap: 12px;
-      }
-
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        margin: 32px 12px 60px;
-      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Background -->
-  <div class="background-wrapper" aria-hidden="true">
-    <div class="background-image"></div>
-  </div>
-
-  <!-- Sticky Header -->
-  <header role="banner">
+  <header>
     <div class="page-title">Wildlife</div>
     <div class="header-icons">
-      <a class="button" href="index.html" aria-label="Go to Home page">Home</a>
-      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer" aria-label="Visit Studio K-Stew Instagram page">
+      <a class="button" href="index.html">Home</a>
+      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer">
         <img src="Instagram_icon.png" alt="Instagram" class="icon" />
       </a>
     </div>
   </header>
 
-  <!-- Gallery Container -->
   <main>
-    <section class="gallery" id="gallery" aria-label="Wildlife photo gallery"></section>
+    <section class="gallery" id="gallery"></section>
   </main>
 
-  <!-- Lightbox -->
-  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded wildlife image view">
-    <button class="lightbox-prev" aria-label="Previous image">&#10094;</button>
-    <img src="" alt="Expanded wildlife view" id="lightbox-img" tabindex="0" />
-    <button class="lightbox-next" aria-label="Next image">&#10095;</button>
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-prev">&#10094;</button>
+    <img src="" alt="Expanded wildlife view" id="lightbox-img" />
+    <button class="lightbox-next">&#10095;</button>
   </div>
 
-  <!-- Footer -->
-  <footer role="contentinfo">&copy; 2025 Studio K-Stew</footer>
+  <footer>&copy; 2025 Studio K-Stew</footer>
 
-  <!-- Script -->
   <script>
-    (() => {
-      const gallery = document.getElementById('gallery');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      const prevBtn = document.querySelector('.lightbox-prev');
-      const nextBtn = document.querySelector('.lightbox-next');
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
 
-      let images = [];
-      let currentIndex = 0;
+    let images = [];
+    let currentIndex = 0;
 
-      // Load images from manifest and filter wildlife images
-      async function loadImages() {
-        try {
-          const response = await fetch('/portfolio/manifest.json');
-          const allImages = await response.json();
+    async function loadImages() {
+      try {
+        const res = await fetch('/portfolio/manifest.json');
+        const all = await res.json();
+        images = all.filter(f => /^wildlife\d+\.(jpe?g|png|webp)$/i.test(f));
 
-          images = allImages.filter(filename => /^wildlife\d+\.(jpe?g|png|webp)$/i.test(filename));
+        images.forEach((img, i) => {
+          const frame = document.createElement('div');
+          frame.className = 'image-frame';
 
-          images.forEach((img, index) => {
-            const frame = document.createElement('div');
-            frame.className = 'image-frame';
+          const image = document.createElement('img');
+          image.src = `/portfolio/${img}`;
+          image.alt = `Wildlife ${i + 1}`;
+          image.loading = 'lazy';
+          image.addEventListener('click', () => showLightbox(i));
 
-            const image = document.createElement('img');
-            image.src = `/portfolio/${img}`;
-            image.alt = `Wildlife photo ${index + 1}`;
-            image.loading = 'lazy';
-            image.tabIndex = 0;
-            image.setAttribute('role', 'button');
-            image.setAttribute('aria-label', `View larger image ${index + 1}`);
-
-            // Open lightbox on click or keyboard enter/space
-            image.addEventListener('click', () => showLightbox(index));
-            image.addEventListener('keydown', e => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                showLightbox(index);
-              }
-            });
-
-            frame.appendChild(image);
-            gallery.appendChild(frame);
-          });
-        } catch (error) {
-          console.error('Error loading manifest.json:', error);
-          gallery.innerHTML = '<p style="color:#f66; text-align:center;">Failed to load images.</p>';
-        }
+          frame.appendChild(image);
+          gallery.appendChild(frame);
+        });
+      } catch (err) {
+        console.error("Failed to load manifest.json", err);
+        gallery.innerHTML = '<p style="color:red; text-align:center;">Failed to load images.</p>';
       }
+    }
 
-      // Show lightbox with selected image
-      function showLightbox(index) {
-        currentIndex = index;
-        lightboxImg.src = `/portfolio/${images[currentIndex]}`;
-        lightbox.classList.add('show');
-        lightboxImg.focus();
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
-      }
+    function showLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+      lightbox.classList.add('show');
+    }
 
-      // Hide lightbox
-      function hideLightbox() {
-        lightbox.classList.remove('show');
-        lightboxImg.src = '';
-        document.body.style.overflow = '';
-      }
+    function hideLightbox() {
+      lightbox.classList.remove('show');
+      lightboxImg.src = '';
+    }
 
-      // Show next image
-      function showNext() {
-        currentIndex = (currentIndex + 1) % images.length;
-        lightboxImg.src = `/portfolio/${images[currentIndex]}`;
-      }
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+    }
 
-      // Show previous image
-      function showPrev() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        lightboxImg.src = `/portfolio/${images[currentIndex]}`;
-      }
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+    }
 
-      // Event listeners
-      nextBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        showNext();
-      });
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); showNext(); });
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); showPrev(); });
+    lightbox.addEventListener('click', hideLightbox);
 
-      prevBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        showPrev();
-      });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('show')) return;
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'Escape') hideLightbox();
+    });
 
-      lightbox.addEventListener('click', () => hideLightbox());
-
-      // Keyboard navigation for lightbox
-      document.addEventListener('keydown', e => {
-        if (!lightbox.classList.contains('show')) return;
-
-        switch (e.key) {
-          case 'ArrowRight':
-            showNext();
-            break;
-          case 'ArrowLeft':
-            showPrev();
-            break;
-          case 'Escape':
-            hideLightbox();
-            break;
-        }
-      });
-
-      loadImages();
-    })();
+    loadImages();
   </script>
 </body>
 </html>
