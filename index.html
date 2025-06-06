@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Background Frame -->
+
+  <!-- Background wrapper holds the visible background image -->
   <div class="background-wrapper">
     <div class="background-image"></div>
   </div>
 
-  <!-- Hero Intro Text -->
+  <!-- Hero Intro Text overlay -->
   <div class="hero-overlay-text">
     <h1>Welcome to Studio K-Stew</h1>
     <p>
@@ -23,18 +24,18 @@
     </p>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main content with navigation buttons and Instagram -->
   <div id="content">
     <h1>Studio K-Stew</h1>
 
-    <!-- Instagram -->
+    <!-- Instagram icon link -->
     <div class="instagram-button">
       <a href="https://www.instagram.com/studiokstew" target="_blank">
         <img src="Instagram_icon.png" alt="Instagram" />
       </a>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation buttons -->
     <div class="buttons">
       <a class="button" href="wildlife.html">Wildlife</a>
       <a class="button" href="landscapes.html">Landscapes</a>
@@ -47,7 +48,7 @@
   <!-- Footer -->
   <footer>&copy; 2025 Kyle Stewart | Studio K-Stew. All rights reserved.</footer>
 
-  <!-- Script -->
+  <!-- Background Slideshow Script -->
   <script>
     let timer;
     let slideshowActive = false;
@@ -97,11 +98,9 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
-      setInitialBackground();
-      loadManifest().then(resetTimer);
-      document.addEventListener("mousemove", resetTimer);
-    });
+    document.addEventListener("mousemove", resetTimer);
+    setInitialBackground();
+    loadManifest().then(resetTimer);
   </script>
 </body>
 </html>
