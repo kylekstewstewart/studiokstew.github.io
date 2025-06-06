@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-body, html {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -11,6 +11,7 @@ body, html {
   background-color: black;
   color: white;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* Fullscreen Background Image */
@@ -18,24 +19,23 @@ body, html {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
+  width: 100%;
   background-image: url('kstewlandingpage.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: -1;
+  z-index: -10;
 }
 
 /* Hero Text Overlay */
 .hero-overlay-text {
+  position: relative;
   text-align: center;
   max-width: 900px;
-  margin: 40px auto;
-  color: white;
-  z-index: 2;
+  margin: 60px auto 20px;
   padding: 0 20px;
-  position: relative;
+  z-index: 10;
 }
 
 .hero-overlay-text h1 {
@@ -52,9 +52,10 @@ body, html {
 
 /* Instagram Icon */
 .instagram-button {
-  margin: 25px auto 40px;
+  margin: 30px auto;
   width: 48px;
   height: 48px;
+  z-index: 10;
 }
 
 .instagram-button img {
@@ -75,6 +76,7 @@ body, html {
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
+  z-index: 10;
 }
 
 .button {
@@ -94,7 +96,17 @@ body, html {
   cursor: pointer;
 }
 
-/* Content container fade (if needed in JS) */
+/* Footer */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ccc;
+  margin: 60px 0 20px;
+  z-index: 10;
+  position: relative;
+}
+
+/* Optional Fade Effects */
 .fade-in {
   opacity: 1;
   transition: opacity 1s ease-in;
@@ -104,14 +116,6 @@ body, html {
   opacity: 0;
   pointer-events: none;
   transition: opacity 1s ease-out;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 40px;
 }
 
 /* Scrollbar Styling */
