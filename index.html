@@ -2,73 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Studio K-Stew</title>
-  <style>
-    /* ======= Reset & Base ======= */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: Arial, sans-serif;
-      color: white;
-      background-color: black;
-      overflow: hidden;
-    }
-
-    /* ======= Slideshow Background ======= */
-    #slideshow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition: background-image 1s ease-in-out;
-      z-index: -1;
-    }
-
-    /* ======= Main Content Box ======= */
-    .content-box {
-      border: 2px solid white;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 12px;
-      max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-    em {
-      font-style: italic;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Background -->
+  <div class="background-image"></div>
 
-  <!-- Background Slideshow -->
-  <div id="slideshow"></div>
-
-  <!-- Main Content -->
-  <div class="content-box">
-    <h1>Studio K-Stew</h1>
+  <!-- Hero Text -->
+  <div class="hero-overlay-text">
+    <h1>Welcome to Studio K-Stew</h1>
     <p>
-       They call me K-Stew, a new england based wildlife and travel photographer drawn to remote places and diverse cultures. 
+      They call me K-Stew, a new england based wildlife and travel photographer drawn to remote places and diverse cultures. 
       I am a PADI certified rescue SCUBA diver, and passionate reef conservationist. 
       I’ve climbed 14,000-foot peaks before sunrise to capture first light over alpine ridges, and hiked through snowstorms 
       in the high desert during the winter solstice. 
@@ -83,28 +29,26 @@
       <br>
 
       Follow me on instagram!
+    </p>
   </div>
 
-  <!-- Slideshow Script -->
-  <script>
-    const images = [
-      'kstew1.jpg',
-      'kstew2.jpg',
-      'kstew3.jpg',
-      'kstew4.jpg'
-    ];
+  <!-- Instagram Icon -->
+  <div class="instagram-button">
+    <a href="https://www.instagram.com/studiokstew" target="_blank">
+      <img src="Instagram_icon.png" alt="Instagram" />
+    </a>
+  </div>
 
-    let current = 0;
-    const slideshow = document.getElementById('slideshow');
+  <!-- Navigation Buttons -->
+  <div class="buttons">
+    <a class="button" href="wildlife.html">Wildlife</a>
+    <a class="button" href="landscapes.html">Landscapes</a>
+    <a class="button" href="portraits.html">Portraits</a>
+    <a class="button" href="sports.html">Sports</a>
+    <a class="button" href="about.html">About Me</a>
+  </div>
 
-    function changeBackground() {
-      slideshow.style.backgroundImage = `url('${images[current]}')`;
-      current = (current + 1) % images.length;
-    }
-
-    changeBackground();
-    setInterval(changeBackground, 5000);
-  </script>
-
+  <!-- Footer -->
+  <footer>&copy; 2025 Kyle Stewart | Studio K-Stew. All rights reserved.</footer>
 </body>
 </html>
