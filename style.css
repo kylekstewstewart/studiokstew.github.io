@@ -8,7 +8,7 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: Arial, sans-serif;
-  background-color: black;
+  background-color: transparent;
   color: white;
   overflow-x: hidden;
   position: relative;
@@ -28,30 +28,25 @@ html, body {
   z-index: -10;
 }
 
-/* Hero Text Overlay */
+/* Transparent Hero Text Overlay */
 .hero-overlay-text {
-  position: relative;
+  background-color: transparent;
   text-align: center;
   max-width: 900px;
   margin: 60px auto 20px;
   padding: 0 20px;
   z-index: 10;
+  position: relative;
 }
 
-.hero-overlay-text h1 {
-  font-size: 2.4rem;
-  margin-bottom: 15px;
-}
-
+.hero-overlay-text h1,
 .hero-overlay-text p {
-  font-size: 1.15rem;
-  line-height: 1.5;
-  max-width: 650px;
-  margin: 0 auto;
+  background-color: transparent;
 }
 
 /* Instagram Icon */
 .instagram-button {
+  background-color: transparent;
   margin: 30px auto;
   width: 48px;
   height: 48px;
@@ -66,6 +61,7 @@ html, body {
   display: block;
 }
 
+/* Hover Zoom */
 .instagram-button img:hover {
   transform: scale(1.1);
 }
@@ -76,11 +72,12 @@ html, body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
+  background-color: transparent;
   z-index: 10;
 }
 
 .button {
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 10px 20px;
   text-decoration: none;
@@ -98,24 +95,13 @@ html, body {
 
 /* Footer */
 footer {
+  background-color: transparent;
   text-align: center;
   font-size: 0.9rem;
   color: #ccc;
   margin: 60px 0 20px;
   z-index: 10;
   position: relative;
-}
-
-/* Optional Fade Effects */
-.fade-in {
-  opacity: 1;
-  transition: opacity 1s ease-in;
-}
-
-.fade-out {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease-out;
 }
 
 /* Scrollbar Styling */
