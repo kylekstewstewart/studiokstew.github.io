@@ -5,155 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Me | Studio K-Stew</title>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
-      background: black;
-      color: white;
-      overflow: hidden;
     }
 
-    .about-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    body {
       background: url('/portfolio/about_01.JPG') center center no-repeat;
       background-size: contain;
       background-color: black;
       border: 12px solid white;
-      z-index: -1;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(3px);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-    }
-
-    .page-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 0 0 6px black;
-    }
-
-    .header-icons {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .button {
-      background: transparent;
-      border: 2px solid #eee;
-      color: #eee;
-      padding: 6px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .button:hover {
-      background-color: #eee;
-      color: #111;
-      cursor: pointer;
-    }
-
-    .icon {
-      width: 28px;
-      height: 28px;
-      filter: drop-shadow(0 0 1px black);
-      transition: transform 0.3s ease;
-    }
-
-    .icon:hover {
-      transform: scale(1.1);
     }
 
     .content {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      color: white;
       text-align: center;
-      max-width: 800px;
-      width: 90%;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-      animation: fadeIn 2s ease forwards;
+      padding: 100px 20px;
+      text-shadow: 0 0 8px black;
     }
 
     .content h1 {
       font-size: 3rem;
-      margin-bottom: 20px;
-      color: white;
-      text-shadow: 0 0 10px black;
     }
 
     .content p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 20px;
-      color: #fff;
-      text-shadow: 0 0 6px black;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translate(-50%, -40%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
-
-    footer {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
-      text-align: center;
-      color: lightgray;
-      font-size: 14px;
-      text-shadow: 0 0 6px black;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 20px auto;
     }
   </style>
 </head>
 <body>
-  <div class="about-background"></div>
-
-  <header>
-    <div class="page-title">About Me</div>
-    <div class="header-icons">
-      <a class="button" href="index.html">Home</a>
-      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer">
-        <img src="Instagram_icon.png" alt="Instagram" class="icon" />
-      </a>
-    </div>
-  </header>
-
-  <main class="content">
-    <h1>Meet the Photographer</h1>
-    <p>
-      I’m Kyle D. Stewart, the eyes and mind behind Studio K-Stew. My journey into photography started on mountain trails and coastal roads—documenting wildlife, sweeping landscapes, and fleeting human moments. What began as a curious hobby became an obsession with light, texture, and raw, honest storytelling. Over the years, I’ve developed a versatile approach that blends adventure with precision, always chasing that one perfect shot.
-    </p>
-    <p>
-      Whether I’m waist-deep in a marsh at sunrise, capturing adrenaline at a sports event, or freezing a quiet portrait in soft window light, I aim to reflect the emotion and spirit of the scene. I believe a great photo doesn’t just document—it evokes. Studio K-Stew is more than a name—it’s a practice of patience, creativity, and grit. Thanks for stepping into my lens.
-    </p>
-  </main>
-
-  <footer>&copy; 2025 Studio K-Stew</footer>
+  <div class="content">
+    <h1>About Me</h1>
+    <p>This is a simple test to confirm the background image loads and fits the screen.</p>
+    <p>If you see this message but no image, the problem is with the file path or image location.</p>
+  </div>
 </body>
 </html>
