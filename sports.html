@@ -1,24 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sports</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sports | Studio K-Stew</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .button {
+      background: transparent;
+      border: 2px solid #eee;
+      color: #eee;
+      padding: 6px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #eee;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 1px black);
+      transition: transform 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+
+    .image-frame {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+      background-color: #222;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .image-frame img:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .lightbox-overlay.show {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 30px white;
+    }
+
+    .lightbox-prev, .lightbox-next {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #eee;
+      font-size: 3rem;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+
+    footer {
+      text-align: center;
+      color: gray;
+      font-size: 14px;
+      padding: 14px 0;
+    }
+  </style>
 </head>
-<body class="alt-page">
-
-  <div class="background-wrapper">
-    <div class="background-image"></div>
-  </div>
-
-  <div id="content" class="fade-in">
-    <h1>Sports</h1>
-    <p>Content coming soon...</p>
-    <div class="buttons">
+<body>
+  <header>
+    <div class="page-title">Sports</div>
+    <div class="header-icons">
       <a class="button" href="index.html">Home</a>
+      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer">
+        <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+      </a>
     </div>
+  </header>
+
+  <main>
+    <section class="gallery" id="gallery"></section>
+  </main>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-prev">&#10094;</button>
+    <img src="" alt="Expanded sports view" id="lightbox-img" />
+    <button class="lightbox-next">&#10095;</button>
   </div>
 
+  <footer>&copy; 2025 Studio K-Stew</footer>
+
+  <script>
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+
+    let images = [];
+    let currentIndex = 0;
+
+    async function loadImages() {
+      try {
+        const res = await fetch('/portfolio/manifest.json');
+        const all = await res.json();
+        images = all.filter(f => /^sports_\d+\.(jpe?g|png|webp)$/i.test(f));
+
+        images.forEach((img, i) => {
+          const frame = document.createElement('div');
+          frame.className = 'image-frame';
+
+          const image = document.createElement('img');
+          image.src = `/portfolio/${img}`;
+          image.alt = `Sports ${i + 1}`;
+          image.loading = 'lazy';
+          image.addEventListener('click', () => showLightbox(i));
+
+          frame.appendChild(image);
+          gallery.appendChild(frame);
+        });
+      } catch (err) {
+        console.error("Failed to load manifest.json", err);
+        gallery.innerHTML = '<p style="color:red; text-align:center;">Failed to load images.</p>';
+      }
+    }
+
+    function showLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+      lightbox.classList.add('show');
+    }
+
+    function hideLightbox() {
+      lightbox.classList.remove('show');
+      lightboxImg.src = '';
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = `/portfolio/${images[currentIndex]}`;
+    }
+
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); showNext(); });
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); showPrev(); });
+    lightbox.addEventListener('click', hideLightbox);
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('show')) return;
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'Escape') hideLightbox();
+    });
+
+    loadImages();
+  </script>
 </body>
 </html>
