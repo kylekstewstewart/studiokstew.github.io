@@ -5,43 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Me | Studio K-Stew</title>
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
-    }
-
-    body {
       background: url('/portfolio/about_01.JPG') center center no-repeat;
       background-size: contain;
       background-color: black;
       border: 12px solid white;
+      overflow: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(3px);
+    }
+
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 0 6px black;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .button {
+      background: transparent;
+      border: 2px solid #eee;
+      color: #eee;
+      padding: 6px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #eee;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(0 0 1px black);
+      transition: transform 0.3s ease;
+    }
+
+    .icon:hover {
+      transform: scale(1.1);
     }
 
     .content {
-      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      padding: 100px 20px;
+      max-width: 800px;
+      width: 90%;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      animation: fadeIn 2s ease forwards;
+      color: white;
       text-shadow: 0 0 8px black;
     }
 
     .content h1 {
       font-size: 3rem;
+      margin-bottom: 20px;
     }
 
     .content p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 20px auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -40%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: lightgray;
+      font-size: 14px;
+      text-shadow: 0 0 6px black;
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h1>About Me</h1>
-    <p>This is a simple test to confirm the background image loads and fits the screen.</p>
-    <p>If you see this message but no image, the problem is with the file path or image location.</p>
-  </div>
+
+  <header>
+    <div class="page-title">About Me</div>
+    <div class="header-icons">
+      <a class="button" href="index.html">Home</a>
+      <a href="https://www.instagram.com/studiokstew" target="_blank" rel="noopener noreferrer">
+        <img src="Instagram_icon.png" alt="Instagram" class="icon" />
+      </a>
+    </div>
+  </header>
+
+<main class="content">
+  <h1>Meet the phototgrapher</h1>
+  <p>I’m Kyle “K-Stew” Stewart, a photographer driven by a deep love for the outdoors and the stories nature tells. From the vast, quiet beauty of high-altitude desert plateaus to the raw energy of storms like Hurricane Dorian, I capture moments that invite you to feel something real — the kind of images that bring calm, adventure, and wonder into your home.</p>
+  
+  <p>Over the years, my work has grown from hiking and mountaineering landscapes to dynamic windsurfing action shots and recently, intimate wildlife portraits. Each photograph is carefully crafted to be more than just a picture — it’s a fine art print designed to inspire and transform your space.</p>
+  
+  <p>When you invest in a Studio K-Stew print, you’re not just buying a photo — you’re bringing a piece of the wild world into your everyday life. Whether it’s the subtle textures of a desert plateau or the thrilling power of a storm, my goal is to create artwork that connects you to nature’s beauty in a way that feels personal and lasting.</p>
+  
+  <p>Thanks for stopping by. I invite you to explore the collection, find what speaks to you, and bring a little adventure and calm into your life with a Studio K-Stew fine art print.</p>
+</main>
+
+  <footer>&copy; 2025 Studio K-Stew</footer>
 </body>
 </html>
